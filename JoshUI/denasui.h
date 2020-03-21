@@ -15,6 +15,19 @@ public:
     DenasUI(QWidget *parent = nullptr);
     ~DenasUI();
 
+private slots:
+    void on_programsButton_clicked();
+
+    void on_frequencyButton_clicked();
+
+    void on_childButton_clicked();
+
+    void on_screeningButton_clicked();
+
+    void on_settingsButton_clicked();
+
+    void on_medButton_clicked();
+
 private:
     Ui::DenasUI *ui;
 };
