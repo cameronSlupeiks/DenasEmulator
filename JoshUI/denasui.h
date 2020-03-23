@@ -16,17 +16,9 @@ public:
     ~DenasUI();
 
 private slots:
-    void on_programsButton_clicked();
+    void on_upButton_clicked();
 
-    void on_frequencyButton_clicked();
-
-    void on_childButton_clicked();
-
-    void on_screeningButton_clicked();
-
-    void on_settingsButton_clicked();
-
-    void on_medButton_clicked();
+    void on_downButton_clicked();
 
 private:
     Ui::DenasUI *ui;
