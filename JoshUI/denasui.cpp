@@ -1,9 +1,7 @@
 #include "denasui.h"
 #include "ui_denasui.h"
 
-DenasUI::DenasUI(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::DenasUI)
+DenasUI::DenasUI(QWidget *parent) : QMainWindow(parent), ui(new Ui::DenasUI)
 {
     ui->setupUi(this);
 }
