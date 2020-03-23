@@ -6,27 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>649</width>
-    <height>848</height>
+    <width>610</width>
+    <height>604</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>DenasUI</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QProgressBar" name="progressBar">
-    <property name="geometry">
-     <rect>
-      <x>470</x>
-      <y>10</y>
-      <width>118</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="value">
-     <number>24</number>
-    </property>
-   </widget>
    <widget class="QLabel" name="Electrode">
     <property name="geometry">
      <rect>
@@ -74,13 +61,16 @@
           <bool>true</bool>
          </property>
          <property name="text">
-          <string>Programs</string>
+          <string>PROGRAM</string>
+         </property>
+         <property name="checkable">
+          <bool>false</bool>
          </property>
          <property name="default">
           <bool>false</bool>
          </property>
          <property name="flat">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -95,7 +85,7 @@
           <bool>true</bool>
          </property>
          <property name="text">
-          <string>Frequency</string>
+          <string>FREQUENCY</string>
          </property>
          <property name="iconSize">
           <size>
@@ -107,7 +97,7 @@
           <bool>false</bool>
          </property>
          <property name="flat">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -122,13 +112,13 @@
           <bool>true</bool>
          </property>
          <property name="text">
-          <string>Med</string>
+          <string>MED</string>
          </property>
          <property name="default">
           <bool>false</bool>
          </property>
          <property name="flat">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -143,7 +133,7 @@
           <bool>true</bool>
          </property>
          <property name="text">
-          <string>Screening</string>
+          <string>SCREENING</string>
          </property>
          <property name="default">
           <bool>false</bool>
@@ -164,7 +154,7 @@
           <bool>true</bool>
          </property>
          <property name="text">
-          <string>Children</string>
+          <string>CHILDREN</string>
          </property>
          <property name="default">
           <bool>false</bool>
@@ -185,34 +175,13 @@
           <bool>true</bool>
          </property>
          <property name="text">
-          <string>Settings</string>
+          <string>SETTINGS</string>
          </property>
          <property name="default">
           <bool>false</bool>
          </property>
          <property name="flat">
           <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="medButton_2">
-         <property name="font">
-          <font>
-           <pointsize>13</pointsize>
-          </font>
-         </property>
-         <property name="mouseTracking">
-          <bool>true</bool>
-         </property>
-         <property name="text">
-          <string>Back</string>
-         </property>
-         <property name="default">
-          <bool>false</bool>
-         </property>
-         <property name="flat">
-          <bool>false</bool>
          </property>
         </widget>
        </item>
@@ -435,16 +404,147 @@
     </widget>
     <widget class="QWidget" name="Settings"/>
    </widget>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>339</y>
+      <width>571</width>
+      <height>231</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="navButtons">
+     <item row="3" column="0">
+      <widget class="QPushButton" name="leftButton">
+       <property name="text">
+        <string>LEFT</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QPushButton" name="mainMenuButton">
+       <property name="text">
+        <string>MAIN MENU</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QPushButton" name="okButton">
+       <property name="text">
+        <string>OK</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="QPushButton" name="rightButton">
+       <property name="text">
+        <string>RIGHT</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QPushButton" name="powerButton">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>ON/OFF</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QPushButton" name="upButton">
+       <property name="text">
+        <string>UP</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QPushButton" name="backButton">
+       <property name="text">
+        <string>BACK</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QPushButton" name="downButton">
+       <property name="text">
+        <string>DOWN</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QProgressBar" name="progressBar">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>20</y>
+      <width>118</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="value">
+     <number>24</number>
+    </property>
+   </widget>
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>9</y>
+      <width>591</width>
+      <height>321</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255)</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+   </widget>
+   <widget class="QFrame" name="frame_2">
+    <property name="geometry">
+     <rect>
+      <x>-1</x>
+      <y>-1</y>
+      <width>611</width>
+      <height>341</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(0, 0, 0)</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+   </widget>
+   <zorder>frame_2</zorder>
+   <zorder>frame</zorder>
    <zorder>stackedWidget</zorder>
-   <zorder>progressBar</zorder>
    <zorder>Electrode</zorder>
+   <zorder>gridLayoutWidget</zorder>
+   <zorder>progressBar</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>649</width>
+     <width>610</width>
      <height>22</height>
     </rect>
    </property>
@@ -452,22 +552,5 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>programsButton</sender>
-   <signal>pressed()</signal>
-   <receiver>stackedWidget</receiver>
-   <slot>raise()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>498</x>
-     <y>129</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>600</x>
-     <y>73</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
