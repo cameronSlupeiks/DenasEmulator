@@ -20,6 +20,14 @@ private slots:
 
     void on_downButton_clicked();
 
+    void on_mainMenuButton_clicked();
+
+    void on_backButton_clicked();
+
+    void on_volumeSlider_sliderMoved(int position);
+
+    void on_volumeSlider_actionTriggered(int action);
+
 private:
     Ui::DenasUI *ui;
 };

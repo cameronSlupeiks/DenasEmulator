@@ -4,6 +4,8 @@
 
 DenasUI::DenasUI(QWidget *parent) : QMainWindow(parent), ui(new Ui::DenasUI)
 {
+   int volume = 25;        //place holder for volume setting
+   //int childRange = 0;    //This code is a place holder for child range
     ui->setupUi(this);
 }
 
@@ -94,4 +96,55 @@ void DenasUI::on_downButton_clicked()
             break;
         }
     }
+}
+
+
+void DenasUI::on_mainMenuButton_clicked()
+{
+     // Get the current stack index (i.e., main menu, programs, frequency, etc.)
+    ui->stackedWidget->setCurrentIndex(0);
+
+}
+
+void DenasUI::on_backButton_clicked()
+{
+    // Get the current stack index (i.e., main menu, programs, frequency, etc.)
+    int currStack = ui->stackedWidget->currentIndex();
+
+    switch(currStack){
+     case 1 :
+        ui->stackedWidget->setCurrentIndex(0);
+        break;
+    case 2 :
+       ui->stackedWidget->setCurrentIndex(0);
+       break;
+    case 3 :
+       ui->stackedWidget->setCurrentIndex(0);
+       break;
+    case 4 :
+       ui->stackedWidget->setCurrentIndex(0);
+       break;
+    case 5 :
+       ui->stackedWidget->setCurrentIndex(0);
+       break;
+    case 6 :
+       ui->stackedWidget->setCurrentIndex(0);
+        break;
+    case 8 :
+       ui->stackedWidget->setCurrentIndex(6);
+        break;
+    case 9 :
+       ui->stackedWidget->setCurrentIndex(6);
+        break;
+    case 10 :
+       ui->stackedWidget->setCurrentIndex(6);
+        break;
+
+    }
+
+}
+
+void DenasUI::on_volumeSlider_sliderMoved(int position)
+{
+    ui->volumeSlider->value();
 }
