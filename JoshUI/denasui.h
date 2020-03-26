@@ -28,6 +28,8 @@ private slots:
 
     void on_okButton_clicked();
 
+    void on_powerButton_clicked();
+
 private:
     Ui::DenasUI *ui;
 };

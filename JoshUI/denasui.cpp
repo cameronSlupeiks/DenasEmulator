@@ -217,3 +217,27 @@ void DenasUI::on_okButton_clicked()
         }
     }
 }
+
+void DenasUI::on_powerButton_clicked()
+{
+    for (int i = 0; i < ui->navButtons->count(); i++)
+    {
+        QPushButton *powerButton = dynamic_cast<QPushButton *>(ui->navButtons->itemAt(i)->widget());
+
+        QVariant isOn = powerButton->property("on");
+
+        if (isOn.isValid())
+        {
+            if (isOn == true)
+            {
+                ui->screen->setHidden(true);
+                powerButton->setProperty("on", false);
+            }
+            else
+            {
+                ui->screen->setHidden(false);
+                powerButton->setProperty("on", true);
+            }
+        }
+    }
+}
