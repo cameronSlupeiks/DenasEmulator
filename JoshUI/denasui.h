@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QGraphicsEffect>
 #include <QAbstractAudioOutput>
-#include <QMediaPlayer>
+//#include <QMediaPlayer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class DenasUI; }
@@ -30,21 +30,24 @@ private slots:
 
     void on_backButton_clicked();
 
-    void on_volumeSlider_actionTriggered(int action);
+    void on_okButton_clicked();
 
-    void on_brightnessSlider_valueChanged(int value);
+    void on_powerButton_clicked();
+
+
+   // void on_brightnessSlider_valueChanged(int value);
 
     //Audio
-     void on_volumeSlider_sliderMoved(int position);
+   //  void on_volumeSlider_sliderMoved(int position);
      //called when file is being played through media player and position has changed
-     void on_positionChanged(qint64 position);
+  //   void on_positionChanged(qint64 position);
      //used when we load file, give full length of file itself
-     void on_durationChanged(qint64 position);
+   //  void on_durationChanged(qint64 position);
 
 
 
 private:
     Ui::DenasUI *ui;
-    QMediaPlayer *player;
+  //  QMediaPlayer *player;
 };
 #endif // DENASUI_H

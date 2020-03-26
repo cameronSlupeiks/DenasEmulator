@@ -14,19 +14,6 @@
    <string>DenasUI</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="Electrode">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>20</y>
-      <width>121</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Skin Contact?</string>
-    </property>
-   </widget>
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
@@ -76,6 +63,9 @@
        <property name="text">
         <string>ON/OFF</string>
        </property>
+       <property name="on" stdset="0">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item row="1" column="1">
@@ -101,20 +91,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QProgressBar" name="progressBar">
-    <property name="geometry">
-     <rect>
-      <x>470</x>
-      <y>20</y>
-      <width>118</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="value">
-     <number>24</number>
-    </property>
-   </widget>
-   <widget class="QFrame" name="frame">
+   <widget class="QFrame" name="screen">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -147,14 +124,14 @@
      <property name="currentIndex">
       <number>8</number>
      </property>
-     <widget class="QWidget" name="mainMenu">
+     <widget class="QWidget" name="main">
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>40</y>
+         <y>-3</y>
          <width>591</width>
-         <height>248</height>
+         <height>291</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -506,7 +483,7 @@
      </widget>
      <widget class="QWidget" name="med"/>
      <widget class="QWidget" name="screening"/>
-     <widget class="QWidget" name="Child">
+     <widget class="QWidget" name="children">
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
@@ -518,44 +495,199 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <widget class="QPushButton" name="ToggleChild">
+         <widget class="QLabel" name="enableDisable">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>15</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
           <property name="text">
-           <string>PushButton</string>
+           <string>DISABLE</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="selected" stdset="0">
+           <bool>true</bool>
+          </property>
+          <property name="enableDisable" stdset="0">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="childUnder1Year">
+         <widget class="QLabel" name="upToOneYear">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>15</pointsize>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
           <property name="text">
-           <string>Up to 1 Year</string>
+           <string>UP TO 1 YEAR</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="selected" stdset="0">
+           <bool>false</bool>
+          </property>
+          <property name="enableDisable" stdset="0">
+           <bool>false</bool>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="child1_3Years">
+         <widget class="QLabel" name="oneToThreeYears">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>15</pointsize>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
           <property name="text">
-           <string>1-3 Years</string>
+           <string>1-3 YEARS</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="selected" stdset="0">
+           <bool>false</bool>
+          </property>
+          <property name="enableDisable" stdset="0">
+           <bool>false</bool>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="child4_7Year">
+         <widget class="QLabel" name="fourToSevenYears">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>15</pointsize>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
           <property name="text">
-           <string>4 - 7 years</string>
+           <string>4-7 YEARS</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="selected" stdset="0">
+           <bool>false</bool>
+          </property>
+          <property name="enableDisable" stdset="0">
+           <bool>false</bool>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="child7_12Years">
+         <widget class="QLabel" name="sevenToTwelveYears">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>15</pointsize>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
           <property name="text">
-           <string>7 - 12 Years</string>
+           <string>7-12 YEARS</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="selected" stdset="0">
+           <bool>false</bool>
+          </property>
+          <property name="enableDisable" stdset="0">
+           <bool>false</bool>
           </property>
          </widget>
         </item>
        </layout>
       </widget>
      </widget>
-     <widget class="QWidget" name="Settings">
+     <widget class="QWidget" name="settings">
       <widget class="QWidget" name="layoutWidget_3">
        <property name="geometry">
         <rect>
@@ -649,7 +781,7 @@
            <string notr="true"/>
           </property>
           <property name="text">
-           <string>Colour</string>
+           <string>COLOUR</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -663,7 +795,7 @@
       </widget>
      </widget>
      <widget class="QWidget" name="page"/>
-     <widget class="QWidget" name="changeBrightness">
+     <widget class="QWidget" name="brightness">
       <widget class="QSlider" name="brightnessSlider">
        <property name="geometry">
         <rect>
@@ -713,7 +845,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="QWidget" name="changeSound">
+     <widget class="QWidget" name="sound">
       <widget class="QSlider" name="volumeSlider">
        <property name="geometry">
         <rect>
@@ -766,7 +898,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="QWidget" name="changeColour">
+     <widget class="QWidget" name="colour">
       <widget class="QWidget" name="layoutWidget_4">
        <property name="geometry">
         <rect>
@@ -802,7 +934,7 @@
            <string notr="true"/>
           </property>
           <property name="text">
-           <string>Dark</string>
+           <string>DARK</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -831,7 +963,7 @@
            <string notr="true"/>
           </property>
           <property name="text">
-           <string>Royalty</string>
+           <string>ROYALTY</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -860,7 +992,7 @@
            <string notr="true"/>
           </property>
           <property name="text">
-           <string>Forest</string>
+           <string>FOREST</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -874,8 +1006,73 @@
       </widget>
      </widget>
     </widget>
+    <widget class="QWidget" name="horizontalLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>591</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="Electrode">
+        <property name="text">
+         <string>Skin Contact?</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QProgressBar" name="progressBar">
+        <property name="value">
+         <number>24</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </widget>
-   <widget class="QFrame" name="frame_2">
+   <widget class="QFrame" name="border">
     <property name="geometry">
      <rect>
       <x>-1</x>
@@ -894,11 +1091,9 @@
      <enum>QFrame::Raised</enum>
     </property>
    </widget>
-   <zorder>frame_2</zorder>
-   <zorder>frame</zorder>
-   <zorder>Electrode</zorder>
+   <zorder>border</zorder>
+   <zorder>screen</zorder>
    <zorder>gridLayoutWidget</zorder>
-   <zorder>progressBar</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
