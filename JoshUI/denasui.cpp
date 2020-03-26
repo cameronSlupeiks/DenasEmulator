@@ -24,9 +24,13 @@ void DenasUI::on_upButton_clicked()
 
     if (!widget) { return; }
 
-    // Each QWidget (stack) has only one layout with QLabel objects as menu items.
+    QList <QLayout *> layouts = widget->findChildren<QLayout *>();
+
+    if (layouts.isEmpty()) { return; }
+
+    // Each QWidget within the stack has only one layout with other objects as menu items.
     // Get the layout of the current QWidget.
-    QLayout *layout = widget->findChildren<QLayout *>().at(0);
+    QLayout *layout = layouts.at(0);
 
     for (int i = layout->count() - 1; i >= 0; i--)
     {
@@ -43,7 +47,7 @@ void DenasUI::on_upButton_clicked()
             QLabel *prevMenuItem = dynamic_cast<QLabel *>(layout->itemAt(prevIndex)->widget());
             QVariant nextSelected = prevMenuItem->property("selected");
 
-            if (nextSelected.isValid() && nextSelected.type() != QMetaType::Bool) { return; }
+            if (!nextSelected.isValid() && nextSelected.type() != QMetaType::Bool) { return; }
 
             // Set the next menu item as selected.
             currMenuItem->setProperty("selected", false);
@@ -66,9 +70,13 @@ void DenasUI::on_downButton_clicked()
 
     if (!widget) { return; }
 
-    // Each QWidget (stack) has only one layout with QLabel objects as menu items.
+    QList <QLayout *> layouts = widget->findChildren<QLayout *>();
+
+    if (layouts.isEmpty()) { return; }
+
+    // Each QWidget within the stack has only one layout with other objects as menu items.
     // Get the layout of the current QWidget.
-    QLayout *layout = widget->findChildren<QLayout *>().at(0);
+    QLayout *layout = layouts.at(0);
 
     for (int i = 0; i < layout->count(); i++)
     {
@@ -85,7 +93,7 @@ void DenasUI::on_downButton_clicked()
             QLabel *nextMenuItem = dynamic_cast<QLabel *>(layout->itemAt(nextIndex)->widget());
             QVariant nextSelected = nextMenuItem->property("selected");
 
-            if (nextSelected.isValid() && nextSelected.type() != QMetaType::Bool) { return; }
+            if (!nextSelected.isValid() && nextSelected.type() != QMetaType::Bool) { return; }
 
             // Set the next menu item as selected.
             currMenuItem->setProperty("selected", false);
@@ -147,4 +155,65 @@ void DenasUI::on_backButton_clicked()
 void DenasUI::on_volumeSlider_sliderMoved(int position)
 {
     ui->volumeSlider->value();
+}
+
+void DenasUI::on_okButton_clicked()
+{
+    // Get the current stack index (i.e., main menu, programs, frequency, etc.)
+    int currStack = ui->stackedWidget->currentIndex();
+
+    // Get the current stack.
+    QWidget *widget = ui->stackedWidget->widget(currStack);
+
+    if (!widget)
+    {
+        return;
+    }
+
+    QList <QLayout *> layouts = widget->findChildren<QLayout *>();
+
+    if (layouts.isEmpty())
+    {
+        return;
+    }
+
+    // Each QWidget within the stack has only one layout with other objects as menu items.
+    // Get the layout of the current QWidget.
+    QLayout *layout = layouts.at(0);
+
+    for (int i = 0; i < layout->count(); i++)
+    {
+        QLabel *currMenuItem = dynamic_cast<QLabel *>(layout->itemAt(i)->widget());
+
+        QVariant currSelected = currMenuItem->property("selected");
+
+        if (!currSelected.isValid() && currSelected.type() != QMetaType::Bool) { return; }
+
+        if (currSelected == true)
+        {
+            QVariant currEnableDisable = currMenuItem->property("enableDisable");
+
+            if (currEnableDisable.isValid() && currEnableDisable.type() == QMetaType::Bool)
+            {
+                // Menu item does not contain a submenu, therefore we know it must toggle/trigger some functionality.
+
+                /*
+                 * Add functionality (i.e., what do the child modes do).
+                 */
+            }
+            else
+            {
+                // Get the QWidget with the object name that is the same as the menu item selected.
+                QWidget *stack = ui->stackedWidget->findChild<QWidget *>(currMenuItem->text().toLower());
+
+                // If there is a QWidget that exists with the same menu item name, make it the current widget.
+                if (stack)
+                {
+                    ui->stackedWidget->setCurrentWidget(stack);
+
+                    break;
+                }
+            }
+        }
+    }
 }

@@ -26,7 +26,7 @@ private slots:
 
     void on_volumeSlider_sliderMoved(int position);
 
-    void on_volumeSlider_actionTriggered(int action);
+    void on_okButton_clicked();
 
 private:
     Ui::DenasUI *ui;
