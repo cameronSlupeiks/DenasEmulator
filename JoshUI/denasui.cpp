@@ -1,12 +1,15 @@
 #include "denasui.h"
 #include "ui_denasui.h"
 #include <QDebug>
+#include <QMediaPlayer>
 
 DenasUI::DenasUI(QWidget *parent) : QMainWindow(parent), ui(new Ui::DenasUI)
 {
-   int volume = 25;        //place holder for volume setting
-   //int childRange = 0;    //This code is a place holder for child range
     ui->setupUi(this);
+    player = new QMediaPlayer(this);
+
+    connect(player, &QMediaPlayer::positionChanged, this, &DenasUI::on_positionChanged);
+    connect(player, &QMediaPlayer::durationChanged, this, &DenasUI::on_positionChanged);
 }
 
 DenasUI::~DenasUI()
@@ -111,32 +114,33 @@ void DenasUI::on_backButton_clicked()
     // Get the current stack index (i.e., main menu, programs, frequency, etc.)
     int currStack = ui->stackedWidget->currentIndex();
 
+    //Depending on which page is open, it will go back to the approproate page before it
     switch(currStack){
-     case 1 :
+     case 1 ://Program -main menu page
         ui->stackedWidget->setCurrentIndex(0);
         break;
-    case 2 :
+    case 2 ://Frequency- main manu
        ui->stackedWidget->setCurrentIndex(0);
        break;
-    case 3 :
+    case 3 ://med- main menu
        ui->stackedWidget->setCurrentIndex(0);
        break;
-    case 4 :
+    case 4 ://screening- menu
        ui->stackedWidget->setCurrentIndex(0);
        break;
-    case 5 :
+    case 5 ://child- main menu
        ui->stackedWidget->setCurrentIndex(0);
        break;
-    case 6 :
+    case 6 ://settings - main manu
        ui->stackedWidget->setCurrentIndex(0);
         break;
-    case 8 :
+    case 8 : //brightness - settings
        ui->stackedWidget->setCurrentIndex(6);
         break;
-    case 9 :
+    case 9 ://sound - settings
        ui->stackedWidget->setCurrentIndex(6);
         break;
-    case 10 :
+    case 10 ://colour-settings
        ui->stackedWidget->setCurrentIndex(6);
         break;
 
@@ -144,7 +148,18 @@ void DenasUI::on_backButton_clicked()
 
 }
 
+
+
+void DenasUI::on_brightnessSlider_valueChanged(int value) //-100 to 100
+{
+     brightness = value/100;
+
+     
+}
+
 void DenasUI::on_volumeSlider_sliderMoved(int position)
 {
-    ui->volumeSlider->value();
+    
 }
+
+

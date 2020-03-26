@@ -2,6 +2,9 @@
 #define DENASUI_H
 
 #include <QMainWindow>
+#include <QGraphicsEffect>
+#include <QAbstractAudioOutput>
+#include <QMediaPlayer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class DenasUI; }
@@ -13,6 +16,9 @@ class DenasUI : public QMainWindow
 
 public:
     DenasUI(QWidget *parent = nullptr);
+    double brightness=0;    //brightness selector changed
+    int childRange=0;       //child range selected
+    bool childOn=false;    //child setting on or off check
     ~DenasUI();
 
 private slots:
@@ -24,11 +30,21 @@ private slots:
 
     void on_backButton_clicked();
 
-    void on_volumeSlider_sliderMoved(int position);
-
     void on_volumeSlider_actionTriggered(int action);
+
+    void on_brightnessSlider_valueChanged(int value);
+
+    //Audio
+     void on_volumeSlider_sliderMoved(int position);
+     //called when file is being played through media player and position has changed
+     void on_positionChanged(qint64 position);
+     //used when we load file, give full length of file itself
+     void on_durationChanged(qint64 position);
+
+
 
 private:
     Ui::DenasUI *ui;
+    QMediaPlayer *player;
 };
 #endif // DENASUI_H
