@@ -36,6 +36,9 @@
        <property name="text">
         <string/>
        </property>
+       <property name="type" stdset="0">
+        <string>BUTTON_OK</string>
+       </property>
       </widget>
      </item>
      <item row="0" column="4">
@@ -1113,6 +1116,9 @@
         <widget class="QProgressBar" name="progressBar">
          <property name="value">
           <number>24</number>
+         </property>
+         <property name="type" stdset="0">
+          <string>BATTERY_DRAIN</string>
          </property>
         </widget>
        </item>

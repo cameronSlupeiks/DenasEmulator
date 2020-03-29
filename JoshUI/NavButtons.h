@@ -3,6 +3,8 @@
 
 #include "Macros.h"
 #include "Button.h"
+#include "denasui.h"
+#include "Microprocessor.h"
 
 class NavButton : public Button
 {
@@ -15,6 +17,8 @@ class NavButton : public Button
 
         request packet;
         QLayout *layout;
+
+        Microprocessor *processor;
 };
 
 #endif // NAVBUTTONS_H

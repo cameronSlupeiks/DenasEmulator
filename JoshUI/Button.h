@@ -2,20 +2,23 @@
 #define BUTTON_H
 
 #include "ui_denasui.h"
-#include "Microprocessor.h"
+// #include "Microprocessor.h"
 
 class Button
 {
     public:
-        Button(QWidget*);
+        Button(class Microprocessor*, QWidget*);
 
         int press(QString);
 
+        QWidget *device;
+
     protected:
         bool *on;
-        QWidget *device;
+
         QLayout *layout;
         QStackedWidget *stack;
+
         class Microprocessor *processor;
 };
 

@@ -17,9 +17,8 @@ class Microprocessor
         int request(QString, struct request);
 
     protected:
-        QWidget *device;
+        Button *button;
         Display *display;
-        class Button *button;
 };
 
 #endif // MICROPROCESSOR_H

@@ -7,11 +7,17 @@
 class Display
 {
     public:
-        Display();
+        Display(QWidget*);
 
         int update(QString, struct request);
 
+
     private:
+        QWidget *device;
+        QStackedWidget *stack;
+
+        int updateMode();
+        int updateMenu(int, QLayout*);
         int updateSelectMenuItem(int, int, QLayout*);
 };
 

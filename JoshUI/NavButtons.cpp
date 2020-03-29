@@ -1,6 +1,5 @@
 #include <QDebug>
 #include "NavButtons.h"
-#include "ui_denasui.h"
 
 /*
  * Constructor: NavButton (copy)
@@ -8,7 +7,10 @@
  *
  * in: a Button reference (const Button)
  */
-NavButton::NavButton(const Button &button) : Button(button) {}
+NavButton::NavButton(const Button &button) : Button(button), processor(Button::processor)
+{
+    qDebug() << "Constructing NavButton copy of Button...";
+}
 
 /*
  * Function: navigate
@@ -52,7 +54,7 @@ int NavButton::navigate(int step)
             // Call the copy constructor for the processor associated with this button.
             // This is necessary since we want the display associated with this processor
             // to receive an instance of this packet request, not a new one with default values.
-            if (Microprocessor(*processor).request(UPDATE_SELECT_ITEM, packet) == 0)
+            if (processor->request(UPDATE_SELECT_ITEM, packet) == 0)
             {
                 return 0;
             }
@@ -65,7 +67,7 @@ int NavButton::navigate(int step)
         {
             packet.index = i;
 
-            if (Microprocessor(*processor).request(UPDATE_SELECT_ITEM, packet) == 0)
+            if (processor->request(UPDATE_SELECT_ITEM, packet) == 0)
             {
                 return 0;
             }

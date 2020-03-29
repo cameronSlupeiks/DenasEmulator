@@ -20,6 +20,7 @@ SOURCES += \
     Display.cpp \
     Microprocessor.cpp \
     NavButtons.cpp \
+    OkButton.cpp \
     PowerButton.cpp \
     main.cpp \
     denasui.cpp
@@ -30,6 +31,7 @@ HEADERS += \
     Macros.h \
     Microprocessor.h \
     NavButtons.h \
+    OkButton.h \
     PowerButton.h \
     denasui.h
 

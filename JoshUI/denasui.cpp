@@ -95,63 +95,66 @@ void DenasUI::on_volumeSlider_sliderMoved(int position)
 
 void DenasUI::on_okButton_clicked()
 {
-    // Get the current stack index (i.e., main menu, programs, frequency, etc.)
-    int currStack = ui->stackedWidget->currentIndex();
+    QString buttonType = ui->okButton->property("type").toString(); // BUTTON_OK
+    microProcessor->request(buttonType);
 
-    // Get the current stack.
-    QWidget *widget = ui->stackedWidget->widget(currStack);
+//    // Get the current stack index (i.e., main menu, programs, frequency, etc.)
+//    int currStack = ui->stackedWidget->currentIndex();
 
-    if (!widget)
-    {
-        return;
-    }
+//    // Get the current stack.
+//    QWidget *widget = ui->stackedWidget->widget(currStack);
 
-    QList <QLayout *> layouts = widget->findChildren<QLayout *>();
+//    if (!widget)
+//    {
+//        return;
+//    }
 
-    if (layouts.isEmpty())
-    {
-        return;
-    }
+//    QList <QLayout *> layouts = widget->findChildren<QLayout *>();
 
-    // Each QWidget within the stack has only one layout with other objects as menu items.
-    // Get the layout of the current QWidget.
-    QLayout *layout = layouts.at(0);
+//    if (layouts.isEmpty())
+//    {
+//        return;
+//    }
 
-    for (int i = 0; i < layout->count(); i++)
-    {
-        QLabel *currMenuItem = dynamic_cast<QLabel *>(layout->itemAt(i)->widget());
+//    // Each QWidget within the stack has only one layout with other objects as menu items.
+//    // Get the layout of the current QWidget.
+//    QLayout *layout = layouts.at(0);
 
-        QVariant currSelected = currMenuItem->property("selected");
+//    for (int i = 0; i < layout->count(); i++)
+//    {
+//        QLabel *currMenuItem = dynamic_cast<QLabel *>(layout->itemAt(i)->widget());
 
-        if (!currSelected.isValid() && currSelected.type() != QMetaType::Bool) { return; }
+//        QVariant currSelected = currMenuItem->property("selected");
 
-        if (currSelected == true)
-        {
-            QVariant currEnableDisable = currMenuItem->property("enableDisable");
+//        if (!currSelected.isValid() && currSelected.type() != QMetaType::Bool) { return; }
 
-            if (currEnableDisable.isValid() && currEnableDisable.type() == QMetaType::Bool)
-            {
-                // Menu item does not contain a submenu, therefore we know it must toggle/trigger some functionality.
+//        if (currSelected == true)
+//        {
+//            QVariant currEnableDisable = currMenuItem->property("enableDisable");
 
-                /*
-                 * Add functionality (i.e., what do the child modes do).
-                 */
-            }
-            else
-            {
-                // Get the QWidget with the object name that is the same as the menu item selected.
-                QWidget *stack = ui->stackedWidget->findChild<QWidget *>(currMenuItem->text().toLower());
+//            if (currEnableDisable.isValid() && currEnableDisable.type() == QMetaType::Bool)
+//            {
+//                // Menu item does not contain a submenu, therefore we know it must toggle/trigger some functionality.
 
-                // If there is a QWidget that exists with the same menu item name, make it the current widget.
-                if (stack)
-                {
-                    ui->stackedWidget->setCurrentWidget(stack);
+//                /*
+//                 * Add functionality (i.e., what do the child modes do).
+//                 */
+//            }
+//            else
+//            {
+//                // Get the QWidget with the object name that is the same as the menu item selected.
+//                QWidget *stack = ui->stackedWidget->findChild<QWidget *>(currMenuItem->text().toLower());
 
-                    break;
-                }
-            }
-        }
-    }
+//                // If there is a QWidget that exists with the same menu item name, make it the current widget.
+//                if (stack)
+//                {
+//                    ui->stackedWidget->setCurrentWidget(stack);
+
+//                    break;
+//                }
+//            }
+//        }
+//    }
 }
 
 void DenasUI::on_powerButton_clicked()
