@@ -19,7 +19,7 @@ class DenasUI : public QMainWindow
 
 public:
     DenasUI(QWidget *parent = nullptr);
-    double brightness=0;    //brightness selector changed
+    double brightness=5;    //brightness selector changed
     int childRange=0;       //child range selected
     bool childOn=false;    //child setting on or off check
   //  string backColour(string uiColour){};

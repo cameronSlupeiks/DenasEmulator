@@ -126,7 +126,7 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>8</number>
      </property>
      <widget class="QWidget" name="main">
       <property name="styleSheet">
@@ -849,13 +849,16 @@
         <string notr="true">background:transparent;</string>
        </property>
        <property name="minimum">
-        <number>-100</number>
+        <number>1</number>
        </property>
        <property name="maximum">
-        <number>100</number>
+        <number>9</number>
+       </property>
+       <property name="value">
+        <number>7</number>
        </property>
        <property name="sliderPosition">
-        <number>0</number>
+        <number>7</number>
        </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -1001,7 +1004,7 @@
            <string notr="true">background:transparent;</string>
           </property>
           <property name="text">
-           <string>Default</string>
+           <string>DEFAULT</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -1115,7 +1118,7 @@
            <string notr="true">background:transparent;</string>
           </property>
           <property name="text">
-           <string>FOREST</string>
+           <string>SHREK IS LOVE</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>

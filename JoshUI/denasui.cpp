@@ -1,12 +1,12 @@
 #include "denasui.h"
 #include "ui_denasui.h"
 #include <QDebug>
-//#include <QMediaPlayer>
+#include <QMediaPlayer>
 
 DenasUI::DenasUI(QWidget *parent) : QMainWindow(parent), ui(new Ui::DenasUI)
 {
     ui->setupUi(this);
-   // player = new QMediaPlayer(this);
+    player = new QMediaPlayer(this);
 
     //connect(player, &QMediaPlayer::positionChanged, this, &DenasUI::on_positionChanged);
    // connect(player, &QMediaPlayer::durationChanged, this, &DenasUI::on_positionChanged);
@@ -16,7 +16,13 @@ DenasUI::~DenasUI()
 {
     delete ui;
 }
+/*
+string backColour(string uiColour){
+     if (uiColour.compare("colWhite")){
 
+     }
+}
+*/
 void DenasUI::on_upButton_clicked()
 {
     // Get the current stack index (i.e., main menu, programs, frequency, etc.)
@@ -119,6 +125,9 @@ void DenasUI::on_mainMenuButton_clicked()
 
 void DenasUI::on_backButton_clicked()
 {
+
+    //audio safeguard
+     player->stop();
     // Get the current stack index (i.e., main menu, programs, frequency, etc.)
     int currStack = ui->stackedWidget->currentIndex();
 
@@ -165,10 +174,10 @@ void DenasUI::on_backButton_clicked()
      
 //}
 
-//void DenasUI::on_volumeSlider_sliderMoved(int position)
-//{
-    
-//}
+void DenasUI::on_volumeSlider_sliderMoved(int position)
+{
+    player->setVolume(position);
+}
 
 
 
@@ -211,7 +220,45 @@ void DenasUI::on_okButton_clicked()
 
             if (currEnableDisable.isValid() && currEnableDisable.type() == QMetaType::Bool)
             {
-                // Menu item does not contain a submenu, therefore we know it must toggle/trigger some functionality.
+
+                //change background colour
+                QLayout *layout = layouts.at(0);
+                //extract backgroung rgb values from custom background property
+               // QString uiBackground = currMenuItem->property("background").String;
+
+                for (int i = 0; i < layout->count(); i++)
+                {
+                    if (currSelected ==true ){
+                         //enable colour = true
+                        currMenuItem->property("enableDiable")=true;
+
+                        //Match theme selection with appropriate background colours
+                        if(currMenuItem->objectName()=="colYellow"){  //green background
+                            ui->screen->setStyleSheet("background-color: rgb(250,255,0);");
+                            ui->stackedWidget->setStyleSheet("background-color: rgb(250,255,0);");
+
+
+                        }else if(currMenuItem->objectName()=="colPurple"){  //green background
+                            ui->screen->setStyleSheet("background-color: rgb(128, 70, 255);");
+                            ui->stackedWidget->setStyleSheet("background-color: rgb(128, 70, 255);");
+
+                        }else if(currMenuItem->objectName()=="colGreen"){//green background
+                            ui->screen->setStyleSheet("background-color: rgb(115, 210, 22);");
+                            ui->stackedWidget->setStyleSheet("background-color: rgba(115, 210, 22,100);");
+                           // ui->colGreen->setStyleSheet("background-color: rgba(115, 210, 22);");
+                            ui->colour->setStyleSheet("background-color: rgba(115, 210, 22);");
+
+
+                        }else{        //default white background
+                            ui->screen->setStyleSheet("background-color: rgb(255,255,255);");
+                            ui->stackedWidget->setStyleSheet("background-color: rgb(255,255,255);");
+                        }
+
+                    }else{
+                        //all other colours enable = false
+                        currMenuItem->property("enableDiable")=false;
+                    }
+                }
 
                 /*
                  * Add functionality (i.e., what do the child modes do).
@@ -226,6 +273,10 @@ void DenasUI::on_okButton_clicked()
                 if (stack)
                 {
                     ui->stackedWidget->setCurrentWidget(stack);
+
+                    //When switched menus, play this
+                    player->setMedia(QUrl::fromLocalFile("/home/student/A3Proj/DenasEmulator/JoshUI/Sounds/DeezNutsSoundEffect.mp3"));
+                    player->play();
 
                     break;
                 }
