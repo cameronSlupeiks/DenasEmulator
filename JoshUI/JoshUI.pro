@@ -16,10 +16,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Button.cpp \
+    Display.cpp \
+    Microprocessor.cpp \
+    NavButtons.cpp \
+    PowerButton.cpp \
     main.cpp \
     denasui.cpp
 
 HEADERS += \
+    Button.h \
+    Display.h \
+    Macros.h \
+    Microprocessor.h \
+    NavButtons.h \
+    PowerButton.h \
     denasui.h
 
 FORMS += \
