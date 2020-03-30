@@ -7,22 +7,13 @@ DenasUI::DenasUI(QWidget *parent) : QMainWindow(parent), ui(new Ui::DenasUI)
 {
     ui->setupUi(this);
     player = new QMediaPlayer(this);
-
-    //connect(player, &QMediaPlayer::positionChanged, this, &DenasUI::on_positionChanged);
-   // connect(player, &QMediaPlayer::durationChanged, this, &DenasUI::on_positionChanged);
 }
 
 DenasUI::~DenasUI()
 {
     delete ui;
 }
-/*
-string backColour(string uiColour){
-     if (uiColour.compare("colWhite")){
 
-     }
-}
-*/
 void DenasUI::on_upButton_clicked()
 {
     // Get the current stack index (i.e., main menu, programs, frequency, etc.)
@@ -167,12 +158,12 @@ void DenasUI::on_backButton_clicked()
 
 
 
-//void DenasUI::on_brightnessSlider_valueChanged(int value) //-100 to 100
-//{
- //    brightness = value/100;
+void DenasUI::on_brightnessSlider_valueChanged(int value) //-100 to 100
+{
+     brightness = value;
 
      
-//}
+}
 
 void DenasUI::on_volumeSlider_sliderMoved(int position)
 {
@@ -221,10 +212,8 @@ void DenasUI::on_okButton_clicked()
             if (currEnableDisable.isValid() && currEnableDisable.type() == QMetaType::Bool)
             {
 
-                //change background colour
+                //CHANGE BACKGROUND COLOUR
                 QLayout *layout = layouts.at(0);
-                //extract backgroung rgb values from custom background property
-               // QString uiBackground = currMenuItem->property("background").String;
 
                 for (int i = 0; i < layout->count(); i++)
                 {
@@ -233,25 +222,152 @@ void DenasUI::on_okButton_clicked()
                         currMenuItem->property("enableDiable")=true;
 
                         //Match theme selection with appropriate background colours
-                        if(currMenuItem->objectName()=="colYellow"){  //green background
-                            ui->screen->setStyleSheet("background-color: rgb(250,255,0);");
-                            ui->stackedWidget->setStyleSheet("background-color: rgb(250,255,0);");
+                            //Yellow background
+                        if(currMenuItem->objectName()=="colYellow"){
+                           switch(brightness){
+                           case 1 :
+                               ui->screen->setStyleSheet("background-color: rgb(210,210,0);");
+                               break;
+                           case 2 :
+                               ui->screen->setStyleSheet("background-color: rgb(225,225,0);");
+                               break;
+                           case 3 :
+                               ui->screen->setStyleSheet("background-color: rgb(235,235,0);");
+                               break;
+                           case 4 :
+                               ui->screen->setStyleSheet("background-color: rgb(245,245,0);");
+                               break;
+                           case 5 :
+                               ui->screen->setStyleSheet("background-color: rgb(250,255,0);");
+                               break;
+                           case 6 :
+                               ui->screen->setStyleSheet("background-color: rgb(250,255,25);");
+                               break;
+                           case 7 :
+                               ui->screen->setStyleSheet("background-color: rgb(250,255,50);");
+                               break;
+                           case 8 :
+                               ui->screen->setStyleSheet("background-color: rgb(250,255,75);");
+                               break;
+                           case 9 :
+                               ui->screen->setStyleSheet("background-color: rgb(250,255,100);");
+                               break;
+                           }
 
 
-                        }else if(currMenuItem->objectName()=="colPurple"){  //green background
-                            ui->screen->setStyleSheet("background-color: rgb(128, 70, 255);");
-                            ui->stackedWidget->setStyleSheet("background-color: rgb(128, 70, 255);");
+                            //Purple background
+                        }else if(currMenuItem->objectName()=="colPurple"){
+                            switch(brightness){
+                            case 1 :
+                                ui->screen->setStyleSheet("background-color: rgb(110,35,255);");
+                                break;
+                            case 2 :
+                                ui->screen->setStyleSheet("background-color: rgb(115,40,255);");
+                                break;
+                            case 3 :
+                                ui->screen->setStyleSheet("background-color: rgb(120,50,255);");
+                                break;
+                            case 4 :
+                                ui->screen->setStyleSheet("background-color: rgb(125,60, 255);");
+                                break;
+                            case 5 :
+                                 ui->screen->setStyleSheet("background-color: rgb(128,70, 255);");
+                                break;
+                            case 6 :
+                                ui->screen->setStyleSheet("background-color: rgb(138,80,255);");
+                                break;
+                            case 7 :
+                                ui->screen->setStyleSheet("background-color: rgb(148,90,255);");
+                                break;
+                            case 8 :
+                                ui->screen->setStyleSheet("background-color: rgb(158,110,255);");
+                                break;
+                            case 9 :
+                                ui->screen->setStyleSheet("background-color: rgb(166,121,255);");
+                                break;
+                            }
 
-                        }else if(currMenuItem->objectName()=="colGreen"){//green background
-                            ui->screen->setStyleSheet("background-color: rgb(115, 210, 22);");
-                            ui->stackedWidget->setStyleSheet("background-color: rgba(115, 210, 22,100);");
-                           // ui->colGreen->setStyleSheet("background-color: rgba(115, 210, 22);");
-                            ui->colour->setStyleSheet("background-color: rgba(115, 210, 22);");
 
+                            //green background
+                        }else if(currMenuItem->objectName()=="colGreen"){
+                            switch(brightness){
+                            case 1 :                                                                //brightness == 1 (from 1 - 9)
+                                ui->screen->setStyleSheet("background-color: rgb(95,170,22);");
+                                break;
+                            case 2 :
+                                ui->screen->setStyleSheet("background-color: rgb(100,180,22);");
+                                break;
+                            case 3 :
+                                ui->screen->setStyleSheet("background-color: rgb(110,190,22);");
+                                break;
+                            case 4 :
+                                ui->screen->setStyleSheet("background-color: rgb(115,200, 22);");
+                                break;
+                            case 5 :
+                                 ui->screen->setStyleSheet("background-color: rgb(115, 210, 22);");
+                                break;
+                            case 6 :
+                                ui->screen->setStyleSheet("background-color: rgb(120,215,22);");
+                                break;
+                            case 7 :
+                                ui->screen->setStyleSheet("background-color: rgb(125,225,22);");
+                                break;
+                            case 8 :
+                                ui->screen->setStyleSheet("background-color: rgb(130,235,22);");
+                                break;
+                            case 9 :                                                                //brightness == 9(from 1 - 9)
+                                ui->screen->setStyleSheet("background-color: rgb(135,245,22);");
+                                break;
+                            }
 
-                        }else{        //default white background
-                            ui->screen->setStyleSheet("background-color: rgb(255,255,255);");
-                            ui->stackedWidget->setStyleSheet("background-color: rgb(255,255,255);");
+                        //white background
+                        }else if(currMenuItem->objectName()=="colWhite"){        //default white background
+                            switch(brightness){
+                            case 1 :                                                                //brightness == 1 (from 1 - 9)
+                                ui->screen->setStyleSheet("background-color: rgb(200,200,200);");
+                                break;
+                            case 2 :
+                                ui->screen->setStyleSheet("background-color: rgb(210,210,210);");
+                                break;
+                            case 3 :
+                                ui->screen->setStyleSheet("background-color: rgb(220,220,220);");
+                                break;
+                            case 4 :
+                                ui->screen->setStyleSheet("background-color: rgb(230,230,230);");
+                                break;
+                            case 5 :
+                                 ui->screen->setStyleSheet("background-color: rgb(240,240,240);");
+                                break;
+                            case 6 :
+                                ui->screen->setStyleSheet("background-color: rgb(243,243,243);");
+                                break;
+                            case 7 :
+                                ui->screen->setStyleSheet("background-color: rgb(247,247,247);");
+                                break;
+                            case 8 :
+                                ui->screen->setStyleSheet("background-color: rgb(251,251,251);");
+                                break;
+                            case 9 :                                                                //brightness == 9(from 1 - 9)
+                                ui->screen->setStyleSheet("background-color: rgb(255,255,255);");
+                                break;
+                            }
+
+                         //Child CLasses
+                        }else if(currMenuItem->objectName() == "disable"){   //Disable current child mode
+                            childOn= false;
+                            childRange= 0;
+                        }else if(currMenuItem->objectName() == "upToOneYear"){  //child setting for <1 year
+                            childOn= true;
+                            childRange= 1;
+                        }else if(currMenuItem->objectName() == "oneToThreeYears"){   //child setting for 1-3 years
+                            childOn= true;
+                            childRange= 3;
+                        }else if(currMenuItem->objectName() == "fourToSevenYears"){   //child setting for 4-7 years
+                            childOn= true;
+                            childRange= 7;
+                        }else if(currMenuItem->objectName() == "sevenToTwelveYears"){  //child setting for 8-12 years year
+                            childOn= true;
+                            childRange= 12;
                         }
 
                     }else{
@@ -260,9 +376,10 @@ void DenasUI::on_okButton_clicked()
                     }
                 }
 
-                /*
-                 * Add functionality (i.e., what do the child modes do).
-                 */
+
+
+
+
             }
             else
             {

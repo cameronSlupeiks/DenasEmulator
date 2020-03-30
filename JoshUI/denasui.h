@@ -19,7 +19,7 @@ class DenasUI : public QMainWindow
 
 public:
     DenasUI(QWidget *parent = nullptr);
-    double brightness=0;    //brightness selector changed
+    int brightness=5;    //brightness selector changed
     int childRange=0;       //child range selected
     bool childOn=false;    //child setting on or off check
   //  string backColour(string uiColour){};
@@ -38,10 +38,8 @@ private slots:
 
     void on_powerButton_clicked();
 
+    void on_brightnessSlider_valueChanged(int value);
 
-   // void on_brightnessSlider_valueChanged(int value);
-
-    //Audio
      void on_volumeSlider_sliderMoved(int position);
 
 
