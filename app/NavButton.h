@@ -3,7 +3,7 @@
 
 #include "Macros.h"
 #include "Button.h"
-#include "denasui.h"
+#include "DenasUI.h"
 #include "Microprocessor.h"
 
 class NavButton : public Button

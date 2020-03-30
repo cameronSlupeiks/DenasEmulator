@@ -29,6 +29,9 @@
        <property name="text">
         <string/>
        </property>
+       <property name="type" stdset="0">
+        <string>BUTTON_RIGHT</string>
+       </property>
       </widget>
      </item>
      <item row="3" column="2">
@@ -80,6 +83,9 @@
       <widget class="QPushButton" name="leftButton">
        <property name="text">
         <string/>
+       </property>
+       <property name="type" stdset="0">
+        <string>BUTTON_LEFT</string>
        </property>
       </widget>
      </item>
@@ -187,7 +193,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="main">
        <widget class="QWidget" name="layoutWidget">
@@ -384,82 +390,106 @@
        </widget>
       </widget>
       <widget class="QWidget" name="programs">
-       <widget class="QWidget" name="layoutWidget_2">
+       <widget class="QWidget" name="layoutWidget_6">
         <property name="geometry">
          <rect>
-          <x>10</x>
-          <y>40</y>
+          <x>0</x>
+          <y>0</y>
           <width>591</width>
-          <height>241</height>
+          <height>291</height>
          </rect>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
+        <layout class="QVBoxLayout" name="verticalLayout_8">
          <item>
-          <widget class="QPushButton" name="ProgramButton1">
-           <property name="font">
-            <font>
-             <pointsize>13</pointsize>
-            </font>
-           </property>
-           <property name="mouseTracking">
+          <widget class="QLabel" name="prog1">
+           <property name="enabled">
             <bool>true</bool>
            </property>
-           <property name="text">
-            <string>Prog1</string>
-           </property>
-           <property name="iconSize">
+           <property name="maximumSize">
             <size>
-             <width>20</width>
-             <height>16</height>
+             <width>16777215</width>
+             <height>25</height>
             </size>
            </property>
-           <property name="default">
-            <bool>false</bool>
+           <property name="font">
+            <font>
+             <pointsize>15</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
            </property>
-           <property name="flat">
+           <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string>ALLERGIES</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="selected" stdset="0">
             <bool>true</bool>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="ProgramButton2">
+          <widget class="QLabel" name="prog2">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>25</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <pointsize>13</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
-           <property name="mouseTracking">
-            <bool>true</bool>
+           <property name="styleSheet">
+            <string notr="true"/>
            </property>
            <property name="text">
-            <string>Prog2</string>
+            <string>HEAD</string>
            </property>
-           <property name="default">
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="selected" stdset="0">
             <bool>false</bool>
-           </property>
-           <property name="flat">
-            <bool>true</bool>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="ProgramButton3">
+          <widget class="QLabel" name="prog3">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>25</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <pointsize>13</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
-           <property name="mouseTracking">
-            <bool>true</bool>
+           <property name="styleSheet">
+            <string notr="true"/>
            </property>
            <property name="text">
-            <string>Prog3</string>
+            <string>ARMS</string>
            </property>
-           <property name="default">
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="selected" stdset="0">
             <bool>false</bool>
-           </property>
-           <property name="flat">
-            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -467,79 +497,193 @@
        </widget>
       </widget>
       <widget class="QWidget" name="frequency">
-       <widget class="QWidget" name="layoutWidget">
+       <widget class="QWidget" name="layoutWidget_5">
         <property name="geometry">
          <rect>
-          <x>40</x>
-          <y>10</y>
-          <width>531</width>
+          <x>0</x>
+          <y>0</y>
+          <width>591</width>
           <height>291</height>
          </rect>
         </property>
-        <layout class="QGridLayout" name="gridLayout">
-         <item row="0" column="0">
-          <widget class="QPushButton" name="hz1_9">
-           <property name="text">
-            <string>PushButton</string>
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <item>
+          <widget class="QLabel" name="frequency1">
+           <property name="enabled">
+            <bool>true</bool>
            </property>
-           <property name="flat">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>15</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string>1.0-9.9Hz</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="selected" stdset="0">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="frequency2">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>13</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string>10Hz</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="selected" stdset="0">
             <bool>false</bool>
            </property>
           </widget>
          </item>
-         <item row="0" column="1">
-          <widget class="QPushButton" name="pushButton_3">
+         <item>
+          <widget class="QLabel" name="frequency3">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>13</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
            <property name="text">
-            <string>PushButton</string>
+            <string>25Hz</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="selected" stdset="0">
+            <bool>false</bool>
            </property>
           </widget>
          </item>
-         <item row="0" column="2">
-          <widget class="QPushButton" name="pushButton_6">
+         <item>
+          <widget class="QLabel" name="frequency4">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>13</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
            <property name="text">
-            <string>PushButton</string>
+            <string>60Hz</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="selected" stdset="0">
+            <bool>false</bool>
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
-          <widget class="QPushButton" name="pushButton_2">
+         <item>
+          <widget class="QLabel" name="frequency5">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>13</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
            <property name="text">
-            <string>PushButton</string>
+            <string>77Hz</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="selected" stdset="0">
+            <bool>false</bool>
            </property>
           </widget>
          </item>
-         <item row="1" column="1">
-          <widget class="QPushButton" name="pushButton_8">
-           <property name="text">
-            <string>PushButton</string>
+         <item>
+          <widget class="QLabel" name="frequency6">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>25</height>
+            </size>
            </property>
-          </widget>
-         </item>
-         <item row="1" column="2">
-          <widget class="QPushButton" name="pushButton_9">
-           <property name="text">
-            <string>PushButton</string>
+           <property name="font">
+            <font>
+             <pointsize>13</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
            </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QPushButton" name="pushButton_7">
-           <property name="text">
-            <string>PushButton</string>
+           <property name="styleSheet">
+            <string notr="true"/>
            </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QPushButton" name="pushButton_5">
            <property name="text">
-            <string>PushButton</string>
+            <string>125Hz</string>
            </property>
-          </widget>
-         </item>
-         <item row="2" column="2">
-          <widget class="QPushButton" name="pushButton_4">
-           <property name="text">
-            <string>PushButton</string>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="selected" stdset="0">
+            <bool>false</bool>
            </property>
           </widget>
          </item>
@@ -1049,6 +1193,50 @@
            </property>
            <property name="selected" stdset="0">
             <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="power">
+       <widget class="QWidget" name="verticalLayoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>59</x>
+          <y>19</y>
+          <width>501</width>
+          <height>251</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_7">
+         <item>
+          <widget class="QLabel" name="powerLabel">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>15</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>POWER</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QProgressBar" name="powerLevel">
+           <property name="value">
+            <number>0</number>
            </property>
           </widget>
          </item>

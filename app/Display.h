@@ -19,6 +19,7 @@ class Display
         int updateMode();
         int updateMenu(int, QLayout*);
         int updateSelectMenuItem(int, int, QLayout*);
+        int updatePowerLevel(int);
 };
 
 #endif // DISPLAY_H

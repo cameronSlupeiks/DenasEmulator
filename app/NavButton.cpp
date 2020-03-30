@@ -1,5 +1,5 @@
 #include <QDebug>
-#include "NavButtons.h"
+#include "NavButton.h"
 
 /*
  * Constructor: NavButton (copy)

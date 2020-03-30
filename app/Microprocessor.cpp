@@ -41,7 +41,8 @@ Microprocessor::Microprocessor(QWidget *device) : button(new Button(this, device
  */
 int Microprocessor::request(QString macro)
 {
-    if (macro == BUTTON_UP || macro == BUTTON_DOWN || macro == BUTTON_POWER || macro == BUTTON_OK)
+    if (macro == BUTTON_UP || macro == BUTTON_DOWN || macro == BUTTON_LEFT ||
+        macro == BUTTON_RIGHT || macro == BUTTON_POWER || macro == BUTTON_OK)
     {
         return button->press(macro);
     }
@@ -58,7 +59,7 @@ int Microprocessor::request(QString macro)
  */
 int Microprocessor::request(QString macro, struct request packet)
 {
-    if (macro == UPDATE_SELECT_ITEM || macro == UPDATE_CHANGE_MODE || macro == UPDATE_CHANGE_MENU)
+    if (macro == UPDATE_SELECT_ITEM || macro == UPDATE_CHANGE_MODE || macro == UPDATE_CHANGE_MENU || macro == UPDATE_POWER_LEVEL)
     {
         return display->update(macro, packet);
     }

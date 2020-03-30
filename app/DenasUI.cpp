@@ -1,7 +1,7 @@
-#include "denasui.h"
+#include "DenasUI.h"
 #include "ui_denasui.h"
 #include "Button.h"
-#include "NavButtons.h"
+#include "NavButton.h"
 #include <QDebug>
 #include <QCommonStyle>
 
@@ -41,6 +41,17 @@ void DenasUI::on_upButton_clicked()
 void DenasUI::on_downButton_clicked()
 {
     QString buttonType = ui->downButton->property("type").toString(); // BUTTON_DOWN
+    microProcessor->request(buttonType);
+}
+
+void DenasUI::on_leftButton_clicked()
+{
+    QString buttonType = ui->leftButton->property("type").toString(); // BUTTON_LEFT
+    microProcessor->request(buttonType);
+}
+void DenasUI::on_rightButton_clicked()
+{
+    QString buttonType = ui->rightButton->property("type").toString(); // BUTTON_RIGHT
     microProcessor->request(buttonType);
 }
 
@@ -97,64 +108,6 @@ void DenasUI::on_okButton_clicked()
 {
     QString buttonType = ui->okButton->property("type").toString(); // BUTTON_OK
     microProcessor->request(buttonType);
-
-//    // Get the current stack index (i.e., main menu, programs, frequency, etc.)
-//    int currStack = ui->stackedWidget->currentIndex();
-
-//    // Get the current stack.
-//    QWidget *widget = ui->stackedWidget->widget(currStack);
-
-//    if (!widget)
-//    {
-//        return;
-//    }
-
-//    QList <QLayout *> layouts = widget->findChildren<QLayout *>();
-
-//    if (layouts.isEmpty())
-//    {
-//        return;
-//    }
-
-//    // Each QWidget within the stack has only one layout with other objects as menu items.
-//    // Get the layout of the current QWidget.
-//    QLayout *layout = layouts.at(0);
-
-//    for (int i = 0; i < layout->count(); i++)
-//    {
-//        QLabel *currMenuItem = dynamic_cast<QLabel *>(layout->itemAt(i)->widget());
-
-//        QVariant currSelected = currMenuItem->property("selected");
-
-//        if (!currSelected.isValid() && currSelected.type() != QMetaType::Bool) { return; }
-
-//        if (currSelected == true)
-//        {
-//            QVariant currEnableDisable = currMenuItem->property("enableDisable");
-
-//            if (currEnableDisable.isValid() && currEnableDisable.type() == QMetaType::Bool)
-//            {
-//                // Menu item does not contain a submenu, therefore we know it must toggle/trigger some functionality.
-
-//                /*
-//                 * Add functionality (i.e., what do the child modes do).
-//                 */
-//            }
-//            else
-//            {
-//                // Get the QWidget with the object name that is the same as the menu item selected.
-//                QWidget *stack = ui->stackedWidget->findChild<QWidget *>(currMenuItem->text().toLower());
-
-//                // If there is a QWidget that exists with the same menu item name, make it the current widget.
-//                if (stack)
-//                {
-//                    ui->stackedWidget->setCurrentWidget(stack);
-
-//                    break;
-//                }
-//            }
-//        }
-//    }
 }
 
 void DenasUI::on_powerButton_clicked()

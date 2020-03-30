@@ -17,26 +17,28 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     Button.cpp \
+    ControlButton.cpp \
+    DenasUI.cpp \
     Display.cpp \
+    Main.cpp \
     Microprocessor.cpp \
-    NavButtons.cpp \
+    NavButton.cpp \
     OkButton.cpp \
-    PowerButton.cpp \
-    main.cpp \
-    denasui.cpp
+    PowerButton.cpp
 
 HEADERS += \
     Button.h \
+    ControlButton.h \
+    DenasUI.h \
     Display.h \
     Macros.h \
     Microprocessor.h \
-    NavButtons.h \
+    NavButton.h \
     OkButton.h \
-    PowerButton.h \
-    denasui.h
+    PowerButton.h
 
 FORMS += \
-    denasui.ui
+    DenasUI.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

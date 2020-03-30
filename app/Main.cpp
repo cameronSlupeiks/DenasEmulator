@@ -1,4 +1,4 @@
-#include "denasui.h"
+#include "DenasUI.h"
 
 #include <QApplication>
 

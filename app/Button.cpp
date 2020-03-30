@@ -2,8 +2,9 @@
 #include "Macros.h"
 #include "Button.h"
 #include "OkButton.h"
-#include "NavButtons.h"
+#include "NavButton.h"
 #include "PowerButton.h"
+#include "ControlButton.h"
 
 /*
  * Constructor: Button (override)
@@ -32,6 +33,14 @@ int Button::press(QString type)
     else if (type == BUTTON_DOWN)
     {
         return NavButton(*this).navigate(1);
+    }
+    else if (type == BUTTON_LEFT)
+    {
+        return ControlButton(*this).increment_decrement(-1);
+    }
+    else if (type == BUTTON_RIGHT)
+    {
+        return ControlButton(*this).increment_decrement(1);
     }
     else if (type == BUTTON_POWER)
     {
