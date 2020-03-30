@@ -7,12 +7,16 @@
 class Display
 {
     public:
-        Display();
+        Display(QWidget*);
 
         int update(QString, struct request);
 
     private:
+        QWidget *device;
+        QStackedWidget *stack;
+
         int updateSelectMenuItem(int, int, QLayout*);
+        int updatePowerLevel(int);
 };
 
 #endif // DISPLAY_H

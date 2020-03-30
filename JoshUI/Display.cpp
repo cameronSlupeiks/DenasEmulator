@@ -5,7 +5,10 @@
  * Constructor: Display (default)
  * Purpose: initialize a default instance of this class.
  */
-Display::Display() {}
+Display::Display(QWidget *device) : device(device)
+{
+    qDebug() << "Constructing display...";
+}
 
 /*
  * Function: update
@@ -20,6 +23,11 @@ int Display::update(QString type, struct request packet)
     if (type == UPDATE_SELECT_ITEM)
     {
         return updateSelectMenuItem(packet.index, packet.step, packet.layout);
+    }
+
+    if (type == UPDATE_POWER_LEVEL)
+    {
+        return updatePowerLevel(packet.step);
     }
 
     return -1;
@@ -65,3 +73,15 @@ int Display::updateSelectMenuItem(int index, int step, QLayout *layout)
     // The current menu item is not selected or its index is out of range, return with error -1;
     return -1;
 }
+
+int Display::updatePowerLevel(int step)
+{
+    stack = device->findChild<QStackedWidget *>("stackedWidget");
+
+    QProgressBar *powerLevel = device->findChild<QProgressBar *>("powerLevel");
+
+    if (step == 1)       {powerLevel->setValue(powerLevel->value() + 1); return 0;}
+    else if (step == -1) {powerLevel->setValue(powerLevel->value() - 1); return 0;}
+    else {return -1;}
+}
+

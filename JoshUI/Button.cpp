@@ -1,9 +1,11 @@
+
 #include <QDebug>
 #include "Macros.h"
 #include "Button.h"
+#include "OkButton.h"
 #include "NavButtons.h"
 #include "PowerButton.h"
-#include "Microprocessor.h"
+#include "ControlButton.h"
 
 /*
  * Constructor: Button (override)
@@ -11,7 +13,10 @@
  *
  * in: the display stack (QStackedWidget*)
  */
-Button::Button(QWidget *device) : on(new bool(true)), device(device) {}
+Button::Button(Microprocessor *processor, QWidget *device) : device(device), on(new bool(true)), processor(processor)
+{
+    qDebug() << "Constructing button...";
+}
 
 /*
  * Function: press
@@ -30,9 +35,21 @@ int Button::press(QString type)
     {
         return NavButton(*this).navigate(1);
     }
+    else if (type == BUTTON_LEFT)
+    {
+        return ControlButton(*this).increment_decrement(-1);
+    }
+    else if (type == BUTTON_RIGHT)
+    {
+        return ControlButton(*this).increment_decrement(1);
+    }
     else if (type == BUTTON_POWER)
     {
         return PowerButton(*this).toggle();
+    }
+    else if (type == BUTTON_OK)
+    {
+        return OkButton(*this).confirm();
     }
 
     return -1;

@@ -17,10 +17,12 @@ class DenasUI : public QMainWindow
         ~DenasUI();
 
     private slots:
-        void on_upButton_clicked();
         void on_okButton_clicked();
+        void on_upButton_clicked();
         void on_downButton_clicked();
         void on_backButton_clicked();
+        void on_leftButton_clicked();
+        void on_rightButton_clicked();
         void on_powerButton_clicked();
         void on_mainMenuButton_clicked();
         void on_volumeSlider_sliderMoved(int position);

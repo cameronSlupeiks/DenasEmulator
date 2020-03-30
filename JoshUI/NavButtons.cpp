@@ -8,7 +8,10 @@
  *
  * in: a Button reference (const Button)
  */
-NavButton::NavButton(const Button &button) : Button(button) {}
+NavButton::NavButton(const Button &button) : Button(button), processor(Button::processor)
+{
+    qDebug() << "Constructing NavButton copy of Button...";
+}
 
 /*
  * Function: navigate

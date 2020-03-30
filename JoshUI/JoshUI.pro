@@ -17,19 +17,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     Button.cpp \
+    ControlButton.cpp \
     Display.cpp \
     Microprocessor.cpp \
     NavButtons.cpp \
+    OkButton.cpp \
     PowerButton.cpp \
     main.cpp \
     denasui.cpp
 
 HEADERS += \
     Button.h \
+    ControlButton.h \
     Display.h \
     Macros.h \
     Microprocessor.h \
     NavButtons.h \
+    OkButton.h \
     PowerButton.h \
     denasui.h
 

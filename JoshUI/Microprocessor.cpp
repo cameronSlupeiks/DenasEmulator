@@ -21,10 +21,9 @@ Microprocessor::Microprocessor(const Microprocessor &processor) {}
  *
  * in: the display stack (QStackedWidget*)
  */
-Microprocessor::Microprocessor(QWidget *device) : device(device)
+Microprocessor::Microprocessor(QWidget *device) : button(new Button(this, device)), display(new Display(device))
 {
-    display = new Display();
-    button = new Button(device);
+    qDebug() << "Constructing processor override...";
 }
 
 /*
@@ -36,7 +35,8 @@ Microprocessor::Microprocessor(QWidget *device) : device(device)
  */
 int Microprocessor::request(QString macro)
 {
-    if (macro == BUTTON_UP || macro == BUTTON_DOWN || macro == BUTTON_POWER)
+    if (macro == BUTTON_UP || macro == BUTTON_DOWN || macro == BUTTON_LEFT ||
+        macro == BUTTON_RIGHT || macro == BUTTON_POWER || macro == BUTTON_OK )
     {
         return button->press(macro);
     }
@@ -53,10 +53,8 @@ int Microprocessor::request(QString macro)
  */
 int Microprocessor::request(QString macro, struct request packet)
 {
-    if (macro == UPDATE_SELECT_ITEM)
-    {
-        return display->update(macro, packet);
-    }
+    if (macro == UPDATE_SELECT_ITEM) {return display->update(macro, packet);}
+    if (macro == UPDATE_POWER_LEVEL) {return display->update(macro, packet);}
 
     return -1;
 }

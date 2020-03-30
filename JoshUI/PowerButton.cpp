@@ -1,3 +1,4 @@
+#include <QDebug>
 #include "PowerButton.h"
 
 /*
@@ -6,7 +7,10 @@
  *
  * in: a Button reference (const Button)
  */
-PowerButton::PowerButton(const Button &button) : Button(button) {}
+PowerButton::PowerButton(const Button &button) : Button(button)
+{
+    qDebug() << "Constructing PowerButton copy of Button...";
+}
 
 /*
  * Function: toggle
