@@ -25,7 +25,6 @@ class DenasUI : public QMainWindow
         void on_rightButton_clicked();
         void on_powerButton_clicked();
         void on_mainMenuButton_clicked();
-        void on_volumeSlider_sliderMoved(int position);
 
     private:
         Ui::DenasUI *ui;

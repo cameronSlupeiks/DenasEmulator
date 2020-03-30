@@ -7,8 +7,6 @@
 
 DenasUI::DenasUI(QWidget *parent) : QMainWindow(parent), ui(new Ui::DenasUI)
 {
-    int volume = 25;        //place holder for volume setting
-    //int childRange = 0;    //This code is a place holder for child range
     ui->setupUi(this);
 
     QCommonStyle style;
@@ -51,7 +49,20 @@ void DenasUI::on_leftButton_clicked()
 }
 void DenasUI::on_rightButton_clicked()
 {
+    qDebug() << ui->stackedWidget->currentIndex();
     QString buttonType = ui->rightButton->property("type").toString(); // BUTTON_RIGHT
+    microProcessor->request(buttonType);
+}
+
+void DenasUI::on_okButton_clicked()
+{
+    QString buttonType = ui->okButton->property("type").toString(); // BUTTON_OK
+    microProcessor->request(buttonType);
+}
+
+void DenasUI::on_powerButton_clicked()
+{
+    QString buttonType = ui->powerButton->property("type").toString(); // BUTTON_POWER
     microProcessor->request(buttonType);
 }
 
@@ -97,21 +108,4 @@ void DenasUI::on_backButton_clicked()
 
     }
 
-}
-
-void DenasUI::on_volumeSlider_sliderMoved(int position)
-{
-    ui->volumeSlider->value();
-}
-
-void DenasUI::on_okButton_clicked()
-{
-    QString buttonType = ui->okButton->property("type").toString(); // BUTTON_OK
-    microProcessor->request(buttonType);
-}
-
-void DenasUI::on_powerButton_clicked()
-{
-    QString buttonType = ui->powerButton->property("type").toString(); // BUTTON_POWER
-    microProcessor->request(buttonType);
 }
