@@ -59,14 +59,19 @@ int Display::updateMenu(int index, QLayout *layout)
     stack = device->findChild<QStackedWidget *>("stackedWidget");
 
     QLabel *currMenu = dynamic_cast<QLabel *>(layout->itemAt(index)->widget());
-    QWidget *subMenu = stack->findChild<QWidget *>(currMenu->text().toLower());
+    QWidget *subMenu;
 
-    if (subMenu)
+    if (currMenu->text() == "ALLERGIES" || currMenu->text() == "HEAD" || currMenu->text() == "ARMS")
     {
-        stack->setCurrentWidget(subMenu);
-
-        return 0;
+        subMenu = stack->findChild<QWidget *>("power");
     }
+
+    else
+    {
+        subMenu = stack->findChild<QWidget *>(currMenu->text().toLower());
+    }
+
+    if (subMenu) {stack->setCurrentWidget(subMenu); return 0;}
 
     return -1;
 }
