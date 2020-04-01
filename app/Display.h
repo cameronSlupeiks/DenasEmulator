@@ -2,10 +2,9 @@
 #define DISPLAY_H
 
 #include "Macros.h"
-#include "ui_denasui.h"
 
 class Display
-{
+{    
     public:
         Display(QWidget*);
 
@@ -16,7 +15,7 @@ class Display
         QWidget *device;
         QStackedWidget *stack;
 
-        int updateMode();
+        int updateMode(QString, QLayout*);
         int updateMenu(int, QLayout*);
         int updateSelectMenuItem(int, int, QLayout*);
         int updatePowerLevel(int);

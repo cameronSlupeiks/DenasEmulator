@@ -1,6 +1,7 @@
 #ifndef DENASUI_H
 #define DENASUI_H
 
+#include <cstdlib>
 #include <QMainWindow>
 #include "Microprocessor.h"
 
@@ -26,7 +27,9 @@ class DenasUI : public QMainWindow
         void on_powerButton_clicked();
         void on_mainMenuButton_clicked();
 
-    private:
+        void on_externalElectrode_stateChanged(int arg1);
+
+private:
         Ui::DenasUI *ui;
         Microprocessor *microProcessor;
 };

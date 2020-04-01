@@ -1,8 +1,8 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include "ui_denasui.h"
-// #include "Microprocessor.h"
+#include <QMainWindow>
+#include <QStackedWidget>
 
 class Button
 {

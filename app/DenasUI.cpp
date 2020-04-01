@@ -1,9 +1,8 @@
 #include "DenasUI.h"
-#include "ui_denasui.h"
 #include "Button.h"
-#include "NavButton.h"
 #include <QDebug>
 #include <QCommonStyle>
+#include "ui_DenasUI.h"
 
 DenasUI::DenasUI(QWidget *parent) : QMainWindow(parent), ui(new Ui::DenasUI)
 {
@@ -108,5 +107,37 @@ void DenasUI::on_backButton_clicked()
     case 11 :
        ui->stackedWidget->setCurrentIndex(1);
 
+    }
+}
+
+void DenasUI::on_externalElectrode_stateChanged(int arg1)
+{
+    // Get the list of programs.
+    QList<QLabel *> programs = ui->programs->findChildren<QLabel *>();
+
+    if (ui->externalElectrode->isChecked())
+    {
+        // The user selected the external electrode checkbox.
+        // Generate a random index according to how many programs there are.
+        int randomIndex = rand() % programs.size();
+
+        if (programs.at(randomIndex)->property("selected").toBool())
+        {
+            // The random index happens to be the selected program.
+            // If it was the last program, make the random index the first program.
+            // Otherwise, set the random index to the next program.
+            randomIndex = ((randomIndex + 1) % programs.size());
+        }
+
+        // Disable the program at the random index.
+        programs.at(randomIndex)->setEnabled(false);
+    }
+    else
+    {
+        // Enable all programs.
+        for (int i = 0; i < programs.size(); i++)
+        {
+            programs.at(i)->setEnabled(true);
+        }
     }
 }

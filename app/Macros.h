@@ -1,7 +1,11 @@
 #ifndef MACROS_H
 #define MACROS_H
 
+#include <QLabel>
+#include <QLayout>
 #include <QMainWindow>
+#include <QProgressBar>
+#include <QStackedWidget>
 
 struct request
 {
@@ -9,6 +13,7 @@ struct request
     int index;
 
     QLayout *layout;
+    QString childName;
 };
 
 #define BUTTON             "BUTTON"

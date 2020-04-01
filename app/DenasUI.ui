@@ -69,7 +69,7 @@
         </font>
        </property>
        <property name="text">
-        <string>POWER</string>
+        <string>ON/OFF</string>
        </property>
        <property name="on" stdset="0">
         <bool>true</bool>
@@ -113,6 +113,16 @@
        </property>
        <property name="type" stdset="0">
         <string>BUTTON_DOWN</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="4">
+      <widget class="QCheckBox" name="externalElectrode">
+       <property name="text">
+        <string>Ext. Electrode</string>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
@@ -193,7 +203,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>11</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="main">
        <widget class="QWidget" name="layoutWidget">

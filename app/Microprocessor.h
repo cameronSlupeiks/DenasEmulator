@@ -4,7 +4,6 @@
 #include "Macros.h"
 #include "Button.h"
 #include "Display.h"
-#include "ui_denasui.h"
 
 class Microprocessor
 {

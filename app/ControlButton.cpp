@@ -1,6 +1,5 @@
 #include <QDebug>
 #include "ControlButton.h"
-#include "ui_denasui.h"
 
 /*
  * Constructor: ControlButton (copy)
