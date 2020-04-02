@@ -22,8 +22,6 @@ NavButton::NavButton(const Button &button) : Button(button), processor(Button::p
  */
 int NavButton::navigate(int step)
 {
-    stack = device->findChild<QStackedWidget*>("stackedWidget");
-
     // Get the index of the current widget within the stack.
     int widgetIndex = stack->currentIndex();
 

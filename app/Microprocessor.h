@@ -5,7 +5,6 @@
 #include "Button.h"
 #include "Display.h"
 #include "battery.h"
-#include "ui_denasui.h"
 
 class Microprocessor
 {
@@ -18,10 +17,10 @@ class Microprocessor
         int request(QString, struct request);
 
     protected:
-        QWidget *device;
-        class Button *button;
+
+        Button *button;
         Display *display;
-        class Battery *battery;
+        Battery *battery;
 };
 
 #endif // MICROPROCESSOR_H

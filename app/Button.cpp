@@ -12,10 +12,8 @@
  *
  * in: the display stack (QStackedWidget*)
  */
-Button::Button(Microprocessor *processor, QWidget *device) : device(device), on(new bool(true)), processor(processor)
-{
-    qDebug() << "Constructing button...";
-}
+Button::Button(Microprocessor *processor, QWidget *device) : device(device), on(new bool(true)), processor(processor),
+                                                             stack(device->findChild<QStackedWidget*>("stackedWidget")) {}
 
 /*
  * Function: press

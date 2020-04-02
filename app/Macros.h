@@ -1,15 +1,21 @@
 #ifndef MACROS_H
 #define MACROS_H
 
+#include <QLabel>
+#include <QLayout>
 #include <QMainWindow>
+#include <QProgressBar>
+#include <QStackedWidget>
 
 struct request
 {
     int step;
     int index;
     int unit;
+    QString func;
     QString useCase;
     QLayout *layout;
+    QString childName;
     QTimer *time;
 };
 
@@ -25,5 +31,7 @@ struct request
 #define UPDATE_CHANGE_MENU "UPDATE_CHANGE_MENU"
 #define UPDATE_POWER_LEVEL "UPDATE_POWER_LEVEL"
 #define BATTERY_DRAIN      "BATTERY_DRAIN"
+#define BATTERY_WARNING    "BATTERY_WARNING"
+#define BATTERY_DEAD       "BATTERY_DEAD"
 
 #endif // MACROS_H

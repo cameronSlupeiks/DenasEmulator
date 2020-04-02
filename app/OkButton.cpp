@@ -18,8 +18,6 @@ OkButton::OkButton(const Button &button) : Button(button), processor(Button::pro
  */
 int OkButton::confirm()
 {
-    stack = device->findChild<QStackedWidget*>("stackedWidget");
-
     int widgetIndex = stack->currentIndex();
 
     QWidget *widget = stack->widget(widgetIndex);
@@ -36,8 +34,7 @@ int OkButton::confirm()
 
     for (int i = 0; i < layout->count(); i++)
     {
-        QLabel *currMenuItem = dynamic_cast<QLabel *>(layout->itemAt(i)->widget());
-
+        QLabel *currMenuItem  = dynamic_cast<QLabel *>(layout->itemAt(i)->widget());
         QVariant currSelected = currMenuItem->property("selected");
 
         if (!currSelected.isValid() && currSelected.type() != QMetaType::Bool) { return -1; }
@@ -50,7 +47,7 @@ int OkButton::confirm()
 
             if (currEnableDisable.isValid() && currEnableDisable.type() == QMetaType::Bool)
             {
-                qDebug() << "Change mode request...";
+                packet.childName = currMenuItem->objectName();
 
                 if (processor->request(UPDATE_CHANGE_MODE, packet) == 0)
                 {
@@ -59,8 +56,6 @@ int OkButton::confirm()
             }
             else
             {
-                qDebug() << "Change menu request...";
-
                 if (processor->request(UPDATE_CHANGE_MENU, packet) == 0)
                 {
                     return 0;

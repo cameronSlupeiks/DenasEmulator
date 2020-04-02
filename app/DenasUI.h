@@ -1,9 +1,10 @@
 #ifndef DENASUI_H
 #define DENASUI_H
 
+#include <cstdlib>
+#include <QCheckBox>
 #include <QMainWindow>
 #include "Microprocessor.h"
-#include <QTimer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class DenasUI; }
@@ -28,11 +29,12 @@ class DenasUI : public QMainWindow
         void on_powerButton_clicked();
         void on_mainMenuButton_clicked();
 
-    private:
-        request packet;
+        void on_externalElectrode_stateChanged(int arg1);
+
+private:
         Ui::DenasUI *ui;
         Microprocessor *microProcessor;
         QTimer *timer;
-        QCheckBox *box;
+        request packet;
 };
 #endif // DENASUI_H

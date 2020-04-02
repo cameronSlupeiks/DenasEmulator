@@ -1,4 +1,3 @@
-
 #include <QDebug>
 #include "Microprocessor.h"
 
@@ -28,9 +27,8 @@ Microprocessor::Microprocessor(const Microprocessor &processor)
  *
  * in: the display stack (QStackedWidget*)
  */
-Microprocessor::Microprocessor(QWidget *device) : button(new Button(this, device)), display(new Display(device))
+Microprocessor::Microprocessor(QWidget *device) : button(new Button(this, device)), display(new Display(device)), battery(new Battery(device))
 {
-    battery = new Battery(device);
     qDebug() << "Constructing processor override...";
 }
 
@@ -44,11 +42,10 @@ Microprocessor::Microprocessor(QWidget *device) : button(new Button(this, device
 int Microprocessor::request(QString macro)
 {
     if (macro == BUTTON_UP || macro == BUTTON_DOWN || macro == BUTTON_LEFT ||
-        macro == BUTTON_RIGHT || macro == BUTTON_POWER || macro == BUTTON_OK)
+        macro == BUTTON_RIGHT || macro == BUTTON_OK)
     {
         return button->press(macro);
     }
-
     return -1;
 }
 
@@ -69,9 +66,9 @@ int Microprocessor::request(QString macro, struct request packet)
     {
         return button->press(macro,packet);
     }
-    else if(macro == BATTERY_DRAIN)
+    else if(macro == BATTERY_DRAIN || macro == BATTERY_DEAD ||macro == BATTERY_WARNING)
     {
-        return battery->battery_darin(packet.useCase,packet.unit);
+        return battery->darin(packet);
     }
 
     return -1;

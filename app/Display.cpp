@@ -26,7 +26,7 @@ int Display::update(QString type, struct request packet)
     }
     else if (type == UPDATE_CHANGE_MODE)
     {
-        return updateMode();
+        return updateMode(packet.childName, packet.layout);
     }
     else if (type == UPDATE_CHANGE_MENU)
     {
@@ -40,8 +40,52 @@ int Display::update(QString type, struct request packet)
     return -1;
 }
 
-int Display::updateMode()
+int Display::updateMode(QString childName, QLayout *layout)
 {
+    QLabel *child = device->findChild<QLabel *>(childName);
+
+    if (!child) { return -1; }
+
+    if (childName == "enableDisable")
+    {
+        // The widget is a menu item that enables/disables the other menu items in the current menu.
+        // An example of this is the ENABLE/DISABLE menu item in the CHILDREN menu.
+        QString text;
+        bool property;
+
+        if (child->property("enableDisable").toBool())
+        {
+            // It is enabled, so disable the other menu items in the list.
+            for (int i = 1; i < layout->count(); i++)
+            {
+                layout->itemAt(i)->widget()->setHidden(true);
+            }
+
+            // Change the text and set it's property to false.
+            text = "ENABLE";
+            property = false;
+        }
+        else
+        {
+            // It is disabled, so enable the other menu items in the list.
+            for (int i = 1; i < layout->count(); i++)
+            {
+                layout->itemAt(i)->widget()->setHidden(false);
+            }
+
+            // Change the text and set it's property to true.
+            text = "DISABLE";
+            property = true;
+        }
+
+        child->setText(text);
+        child->setProperty("enableDisable", property);
+    }
+    else
+    {
+
+    }
+
     // Note: Josh and Cam S., implement what you want here.
     // This is for menu items that do not have a submenu (i.e., selecting a child mode or frequency).
     return -1;
@@ -96,10 +140,19 @@ int Display::updateSelectMenuItem(int index, int step, QLayout *layout)
 
     if (currSelected == true && nextIndex < layout->count() && nextIndex >= 0)
     {
+        qDebug() << layout->count();
+
+        if (!layout->itemAt(nextIndex)->widget()->isEnabled()) { nextIndex += step; }
+        if (nextIndex > (layout->count() - 1) || nextIndex < 0) { return -1; }
+
+        qDebug() << nextIndex;
+
         // We found the currently selected menu item.
         // The next menu item is within range, so get its widget for property and text manipulation.
         QLabel *nextMenuItem = dynamic_cast<QLabel *>(layout->itemAt(nextIndex)->widget());
         QVariant nextSelected = nextMenuItem->property("selected");
+
+        if (!nextMenuItem) { return -1; }
 
         // If the next menu item to select does not have a "selected" property that is a boolean, return with error -1.
         if (!nextSelected.isValid() && nextSelected.type() != QMetaType::Bool) { return -1; }

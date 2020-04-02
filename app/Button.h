@@ -1,8 +1,8 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include "ui_denasui.h"
-// #include "Microprocessor.h"
+#include <QMainWindow>
+#include <QStackedWidget>
 
 class Button
 {
@@ -10,7 +10,7 @@ class Button
         Button(class Microprocessor*, QWidget*);
 
         int press(QString);
-        int press(QString,struct request packet);
+        int press(QString,struct request);
 
         QWidget *device;
 

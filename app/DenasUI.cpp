@@ -1,13 +1,9 @@
 #include "DenasUI.h"
-#include "battery.h"
-#include "ui_denasui.h"
 #include "Button.h"
-#include "NavButton.h"
 #include <QDebug>
 #include <QCommonStyle>
-#include <QtMath>
-#include <QFrame>
-#include <QTime>
+#include <QTimer>
+#include "ui_DenasUI.h"
 
 DenasUI::DenasUI(QWidget *parent) : QMainWindow(parent), ui(new Ui::DenasUI)
 {
@@ -26,38 +22,48 @@ DenasUI::DenasUI(QWidget *parent) : QMainWindow(parent), ui(new Ui::DenasUI)
 
     // Initialize the device processor.
     QWidget *device = ui->centralwidget;
+    device->findChild<QLabel*>("batWarning")->setVisible(false);
     microProcessor = new Microprocessor(device);
     //==================timer for the batery drain plz dont touch=================RAUL/start(2)
     timer = new QTimer(this);
     packet.time = timer;
     connect(timer, SIGNAL(timeout()), this, SLOT(timer_exec()));
     //Currently set at: 1/2 min.
-    timer->start(1000);//<------sets the intervas(in milisec) at which the function 'battery_darin()' gets called.
+    timer->start(9000);//<------sets the intervas(in milisec) at which the function 'battery_darin()' gets called.
     //======================================================================RAUL/end(2)
-
 
 }
 void DenasUI::timer_exec(){
+
    QWidget *device = ui->centralwidget;
-   QCheckBox* temp = device->findChild<QCheckBox*>("checkBox");
+
    QProgressBar *theBar = device->findChild<QProgressBar*>("progressBar");
-   QFrame *screen = device->findChild<QFrame*>("screen");
-   if(theBar->value()<=0)
+   if(theBar->value()<=2)
    {
-       screen->setVisible(false);
+       packet.func = "dead";
+       microProcessor->request("BATTERY_DEAD",packet);
    }
-   else if(temp->checkState()==2)
+   else if(theBar->value()<=20)
    {
-       packet.useCase = "boost";
-       packet.unit=10;
+       packet.func ="warning";
+       microProcessor->request("BATTERY_WARNING",packet);
+   }
+
+   QCheckBox* temp = device->findChild<QCheckBox*>("checkBox");
+
+   if(temp->checkState()==2)
+   {
+       packet.useCase = "contact";
    }
    else
    {
         packet.useCase ="";
 
    }
+   packet.func = "drain";
    microProcessor->request("BATTERY_DRAIN",packet);
 }
+
 DenasUI::~DenasUI()
 {
     delete ui;
@@ -141,5 +147,37 @@ void DenasUI::on_backButton_clicked()
     case 11 :
        ui->stackedWidget->setCurrentIndex(1);
 
+    }
+}
+
+void DenasUI::on_externalElectrode_stateChanged(int arg1)
+{
+    // Get the list of programs.
+    QList<QLabel *> programs = ui->programs->findChildren<QLabel *>();
+
+    if (ui->externalElectrode->isChecked())
+    {
+        // The user selected the external electrode checkbox.
+        // Generate a random index according to how many programs there are.
+        int randomIndex = rand() % programs.size();
+
+        if (programs.at(randomIndex)->property("selected").toBool())
+        {
+            // The random index happens to be the selected program.
+            // If it was the last program, make the random index the first program.
+            // Otherwise, set the random index to the next program.
+            randomIndex = ((randomIndex + 1) % programs.size());
+        }
+
+        // Disable the program at the random index.
+        programs.at(randomIndex)->setEnabled(false);
+    }
+    else
+    {
+        // Enable all programs.
+        for (int i = 0; i < programs.size(); i++)
+        {
+            programs.at(i)->setEnabled(true);
+        }
     }
 }
