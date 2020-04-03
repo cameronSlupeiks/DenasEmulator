@@ -3,6 +3,7 @@
 
 #include <cstdlib>
 #include <QMainWindow>
+#include <QCheckBox>
 #include "Microprocessor.h"
 
 QT_BEGIN_NAMESPACE
@@ -17,6 +18,9 @@ class DenasUI : public QMainWindow
         DenasUI(QWidget *parent = nullptr);
         ~DenasUI();
 
+    public slots:
+        void timer_exec();
+
     private slots:
         void on_okButton_clicked();
         void on_upButton_clicked();
@@ -29,8 +33,11 @@ class DenasUI : public QMainWindow
 
         void on_externalElectrode_stateChanged(int arg1);
 
-private:
+    private:
         Ui::DenasUI *ui;
         Microprocessor *microProcessor;
+        QTimer *timer;
+        request packet;
 };
+
 #endif // DENASUI_H

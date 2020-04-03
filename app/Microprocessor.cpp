@@ -34,6 +34,18 @@ Microprocessor::Microprocessor(QWidget *device) : button(new Button(this, device
 
 /*
  * Function: request
+ * Purpose: sends a request to reset the system timer
+ *
+ * in: N/A
+ * return: reset was not successful (-1); otherwise, function call successfull (0).
+ */
+int Microprocessor::request()
+{
+    return display->reset();
+}
+
+/*
+ * Function: request
  * Purpose: to determine and call the necessary function with no packet request associated with the macro parameter.
  *
  * in: a macro (QString) (i.e., BUTTON_UP, BUTTON_DOWN)
@@ -59,9 +71,20 @@ int Microprocessor::request(QString macro)
  */
 int Microprocessor::request(QString macro, struct request packet)
 {
-    if (macro == UPDATE_SELECT_ITEM || macro == UPDATE_CHANGE_MODE || macro == UPDATE_CHANGE_MENU || macro == UPDATE_POWER_LEVEL)
+    if (macro == UPDATE_SELECT_ITEM || macro == UPDATE_CHANGE_MODE || macro == UPDATE_CHANGE_MENU ||
+        macro == UPDATE_POWER_LEVEL || macro == UPDATE_TIMER || macro == UPDATE_FREQUENCY)
     {
         return display->update(macro, packet);
+    }
+
+    else if(macro == BUTTON_POWER)
+    {
+        return button->press(macro,packet);
+    }
+
+    else if(macro == BATTERY_DRAIN || macro == BATTERY_DEAD ||macro == BATTERY_WARNING)
+    {
+        return battery->drain(packet);
     }
 
     return -1;

@@ -11,7 +11,7 @@ class PowerButton : public Button
     private:
         PowerButton(const Button &button);
 
-        int toggle();
+        int toggle(struct request);
 };
 
 #endif // POWERBUTTON_H

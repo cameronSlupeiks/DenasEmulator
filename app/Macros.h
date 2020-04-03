@@ -11,9 +11,15 @@ struct request
 {
     int step;
     int index;
+    int unit;
 
-    QLayout *layout;
+    QString func;
+    QString useCase;
     QString childName;
+    QString frequency;
+    QLayout *layout;
+    QTimer  *time;
+
 };
 
 #define BUTTON             "BUTTON"
@@ -27,5 +33,10 @@ struct request
 #define UPDATE_CHANGE_MODE "UPDATE_CHANGE_MODE"
 #define UPDATE_CHANGE_MENU "UPDATE_CHANGE_MENU"
 #define UPDATE_POWER_LEVEL "UPDATE_POWER_LEVEL"
+#define UPDATE_TIMER       "UPDATE_TIMER"
+#define UPDATE_FREQUENCY   "UPDATE_FREQUENCY"
+#define BATTERY_DRAIN      "BATTERY_DRAIN"
+#define BATTERY_WARNING    "BATTERY_WARNING"
+#define BATTERY_DEAD       "BATTERY_DEAD"
 
 #endif // MACROS_H

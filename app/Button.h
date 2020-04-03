@@ -10,6 +10,7 @@ class Button
         Button(class Microprocessor*, QWidget*);
 
         int press(QString);
+        int press(QString, struct request);
 
         QWidget *device;
 

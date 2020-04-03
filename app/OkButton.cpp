@@ -1,3 +1,4 @@
+
 #include <QDebug>
 #include "OkButton.h"
 
@@ -32,6 +33,11 @@ int OkButton::confirm()
 
     packet.layout = layout;
 
+    if (widget->objectName() == "power" && widget->findChild<QProgressBar *>("powerLevel")->value() != 0)
+    {
+        if (processor->request(UPDATE_TIMER, packet) == 0) { return 0; }
+    }
+
     for (int i = 0; i < layout->count(); i++)
     {
         QLabel *currMenuItem  = dynamic_cast<QLabel *>(layout->itemAt(i)->widget());
@@ -44,6 +50,17 @@ int OkButton::confirm()
             packet.index = i;
 
             QVariant currEnableDisable = currMenuItem->property("enableDisable");
+
+            if (widget->objectName() == "frequency")
+            {
+                packet.frequency = currMenuItem->text();
+
+                if (processor->request(UPDATE_FREQUENCY, packet) == 0)
+                {
+                    return 0;
+                }
+
+            }
 
             if (currEnableDisable.isValid() && currEnableDisable.type() == QMetaType::Bool)
             {

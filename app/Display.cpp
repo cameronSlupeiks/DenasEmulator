@@ -7,6 +7,11 @@
  */
 Display::Display(QWidget *device) : device(device)
 {
+    timer = new QTimer(this);
+    time  = QTime(0,10,0,0);
+    stack = device->findChild<QStackedWidget *>("stackedWidget");
+    powerLevel = device->findChild<QProgressBar *>("powerLevel");
+
     qDebug() << "Constructing display...";
 }
 
@@ -35,6 +40,14 @@ int Display::update(QString type, struct request packet)
     else if (type == UPDATE_POWER_LEVEL)
     {
         return updatePowerLevel(packet.step);
+    }
+    else if (type == UPDATE_TIMER)
+    {
+        return startTimer();
+    }
+    else if (type == UPDATE_FREQUENCY)
+    {
+        return updateFrequency(packet.frequency);
     }
 
     return -1;
@@ -83,11 +96,28 @@ int Display::updateMode(QString childName, QLayout *layout)
     }
     else
     {
+        if (childName == "upToOneYear")
+        {
+            powerLevel->setMaximum(30);
+        }
+        else if (childName == "oneToThreeYears")
+        {
+            powerLevel->setMaximum(40);
+        }
+        else if (childName == "fourToSevenYears")
+        {
+            powerLevel->setMaximum(50);
+        }
+        else if (childName == "sevenToTwelveYears")
+        {
+            powerLevel->setMaximum(60);
+        }
 
+        qDebug() << powerLevel->maximum();
+
+        return 0;
     }
 
-    // Note: Josh and Cam S., implement what you want here.
-    // This is for menu items that do not have a submenu (i.e., selecting a child mode or frequency).
     return -1;
 }
 
@@ -100,8 +130,6 @@ int Display::updateMode(QString childName, QLayout *layout)
  */
 int Display::updateMenu(int index, QLayout *layout)
 {
-    stack = device->findChild<QStackedWidget *>("stackedWidget");
-
     QLabel *currMenu = dynamic_cast<QLabel *>(layout->itemAt(index)->widget());
     QWidget *subMenu;
 
@@ -173,11 +201,73 @@ int Display::updateSelectMenuItem(int index, int step, QLayout *layout)
 
 int Display::updatePowerLevel(int step)
 {
-    stack = device->findChild<QStackedWidget *>("stackedWidget");
-
-    QProgressBar *powerLevel = device->findChild<QProgressBar *>("powerLevel");
-
     if (step == 1)       {powerLevel->setValue(powerLevel->value() + 1); return 0;}
     else if (step == -1) {powerLevel->setValue(powerLevel->value() - 1); return 0;}
     else {return -1;}
+}
+
+int Display::updateFrequency(QString frequency)
+{
+    QFrame *screen = device->findChild<QFrame *>("screen");
+    QLabel *frequencyLabel = screen->findChild<QLabel *>("frequencyLabel");
+
+    frequencyLabel->setText("Frequency: " + frequency);
+
+    return 0;
+}
+
+int Display::startTimer()
+{
+    QWidget *widget = stack->findChild<QWidget *>("med");
+
+    connect(timer, SIGNAL(timeout()), SLOT(updateTimer()));
+    timer->start(1000);
+    stack->setCurrentWidget(widget);
+
+    qDebug() << "programsTimer started...";
+
+    return 0;
+}
+
+void Display::updateTimer()
+{
+    QTime local_time = time;
+    QString time_text = local_time.toString("mm : ss");
+    QLabel *label = stack->findChild<QLabel *>("countdown");
+
+    qDebug() << time.second();
+
+    device->findChild<QWidget *>("leftButton")->setEnabled(false);
+    device->findChild<QWidget *>("rightButton")->setEnabled(false);
+    device->findChild<QWidget *>("upButton")->setEnabled(false);
+    device->findChild<QWidget *>("downButton")->setEnabled(false);
+    device->findChild<QWidget *>("okButton")->setEnabled(false);
+    device->findChild<QWidget *>("mainMenuButton")->setEnabled(false);
+
+    label->setText(time_text);
+    time = time.addSecs(-1);
+
+    if (time.minute() == 0 && time.second() == 0 ) {this->reset();}
+}
+
+int Display::reset()
+{
+    QWidget *widget = stack->findChild<QWidget *>("main");
+
+    timer->stop();
+    time = QTime(0,10,0,0);
+
+    device->findChild<QWidget *>("leftButton")->setEnabled(true);
+    device->findChild<QWidget *>("rightButton")->setEnabled(true);
+    device->findChild<QWidget *>("upButton")->setEnabled(true);
+    device->findChild<QWidget *>("downButton")->setEnabled(true);
+    device->findChild<QWidget *>("okButton")->setEnabled(true);
+    device->findChild<QWidget *>("mainMenuButton")->setEnabled(true);
+
+    powerLevel->setValue(0);
+    stack->setCurrentWidget(widget);
+
+    qDebug() << "Program Timer Reset...";
+
+    return 0;
 }

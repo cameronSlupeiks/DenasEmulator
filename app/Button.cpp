@@ -51,3 +51,12 @@ int Button::press(QString type)
 
     return -1;
 }
+
+int Button::press(QString type,struct request packet)
+{
+    if (type == BUTTON_POWER)
+    {
+        return PowerButton(*this).toggle(packet);
+    }
+    return -1;
+}

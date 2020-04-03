@@ -22,6 +22,38 @@ DenasUI::DenasUI(QWidget *parent) : QMainWindow(parent), ui(new Ui::DenasUI)
     // Initialize the device processor.
     QWidget *device = ui->centralwidget;
     microProcessor = new Microprocessor(device);
+
+    // Initialize and start the battery timer.
+
+    timer = new QTimer(this);
+    packet.time = timer;
+    connect(timer, SIGNAL(timeout()), this, SLOT(timer_exec()));
+    timer->start(9000);
+}
+
+void DenasUI::timer_exec(){
+
+   QWidget *device = ui->centralwidget;
+   QProgressBar *theBar = device->findChild<QProgressBar*>("progressBar");
+
+   if (theBar->value() <= 2)
+   {
+       packet.func = "dead";
+       microProcessor->request("BATTERY_DEAD", packet);
+   }
+   else if (theBar->value() <= 20)
+   {
+       packet.func = "warning";
+       microProcessor->request("BATTERY_WARNING",packet);
+   }
+
+   QCheckBox* temp = device->findChild<QCheckBox*>("checkBox");
+
+   if (temp->checkState() == 2) {packet.useCase = "contact";}
+   else {packet.useCase = "";}
+
+   packet.func = "drain";
+   microProcessor->request("BATTERY_DRAIN", packet);
 }
 
 DenasUI::~DenasUI()
@@ -48,7 +80,6 @@ void DenasUI::on_leftButton_clicked()
 }
 void DenasUI::on_rightButton_clicked()
 {
-    qDebug() << ui->stackedWidget->currentIndex();
     QString buttonType = ui->rightButton->property("type").toString(); // BUTTON_RIGHT
     microProcessor->request(buttonType);
 }
@@ -84,6 +115,7 @@ void DenasUI::on_backButton_clicked()
        ui->stackedWidget->setCurrentIndex(0);
        break;
     case 3 :
+       if (ui->stackedWidget->currentWidget()->objectName() == "med") {microProcessor->request();}
        ui->stackedWidget->setCurrentIndex(0);
        break;
     case 4 :
