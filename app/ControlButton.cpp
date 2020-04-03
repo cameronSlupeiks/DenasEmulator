@@ -11,7 +11,7 @@ ControlButton::ControlButton(const Button &button) : Button(button), processor(B
 
 /*
  * Function: increment_decrement
- * Purpose: to increment or decrement the power level bar
+ * Purpose: to increment or decrement the power level bar or brightness bar
  *
  * in: step (integer)
  * return: 0 if successfull, -1 otherwise.
@@ -32,6 +32,9 @@ int ControlButton::increment_decrement(int step)
     if (!widget) {return -1;}
     else if (widget->objectName() == "power") {
         processor->request(UPDATE_POWER_LEVEL, packet);
+        return 0;
+    }else if(widget->objectName()=="brightness"){
+        processor->request(UPDATE_BRIGHTNESS_LEVEL,packet);
         return 0;
     }
 

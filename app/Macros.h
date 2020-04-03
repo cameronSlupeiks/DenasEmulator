@@ -12,9 +12,13 @@ struct request
     int step;
     int index;
 
+
     QLayout *layout;
     QString childName;
 };
+
+extern bool childOn;
+extern int childRange;
 
 #define BUTTON             "BUTTON"
 #define BUTTON_OK          "BUTTON_OK"
@@ -27,5 +31,6 @@ struct request
 #define UPDATE_CHANGE_MODE "UPDATE_CHANGE_MODE"
 #define UPDATE_CHANGE_MENU "UPDATE_CHANGE_MENU"
 #define UPDATE_POWER_LEVEL "UPDATE_POWER_LEVEL"
+#define UPDATE_BRIGHTNESS_LEVEL "UPDATE_BRIGHTNESS_LEVEL"
 
 #endif // MACROS_H

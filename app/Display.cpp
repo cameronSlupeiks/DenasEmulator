@@ -8,6 +8,7 @@
 Display::Display(QWidget *device) : device(device)
 {
     qDebug() << "Constructing display...";
+
 }
 
 /*
@@ -36,6 +37,10 @@ int Display::update(QString type, struct request packet)
     {
         return updatePowerLevel(packet.step);
     }
+    else if(type == UPDATE_BRIGHTNESS_LEVEL)
+    {
+         return updateBrightnessLevel(packet.step);
+    }
 
     return -1;
 }
@@ -43,6 +48,16 @@ int Display::update(QString type, struct request packet)
 int Display::updateMode(QString childName, QLayout *layout)
 {
     QLabel *child = device->findChild<QLabel *>(childName);
+    stack = device->findChild<QStackedWidget*>("stackedWidget");
+
+    // Get the index of the current widget within the stack.
+    int widgetIndex = stack->currentIndex();
+
+    // Get the current widget within the stack.
+    QWidget *widget = stack->widget(widgetIndex);
+    int brightness =5;
+    bool childOn = false;
+    int childRange =0;
 
     if (!child) { return -1; }
 
@@ -55,6 +70,7 @@ int Display::updateMode(QString childName, QLayout *layout)
 
         if (child->property("enableDisable").toBool())
         {
+            qDebug() << "Child property, property accessed";
             // It is enabled, so disable the other menu items in the list.
             for (int i = 1; i < layout->count(); i++)
             {
@@ -67,6 +83,7 @@ int Display::updateMode(QString childName, QLayout *layout)
         }
         else
         {
+            qDebug() << "Child property, property accessed";
             // It is disabled, so enable the other menu items in the list.
             for (int i = 1; i < layout->count(); i++)
             {
@@ -80,13 +97,320 @@ int Display::updateMode(QString childName, QLayout *layout)
 
         child->setText(text);
         child->setProperty("enableDisable", property);
-    }
-    else
-    {
 
-    }
+    }else if(childName== "enableDisable")      //Child CLasses
+    {   //Disable current child mode
+         childOn= false;
+         childRange= 0;
+     }else if(childName == "upToOneYear"){  //child setting for <1 year
+         childOn= true;
+         childRange= 1;
+     }else if(childName== "oneToThreeYears"){   //child setting for 1-3 years
+         childOn= true;
+         childRange= 3;
+     }else if(childName== "fourToSevenYears"){   //child setting for 4-7 years
+         childOn= true;
+         childRange= 7;
+     }else if(childName== "sevenToTwelveYears"){  //child setting for 8-12 years year
+         childOn= true;
+         childRange= 12;
+     }else if(widget->objectName() == "colour"){
+        for (int i = 0; i < layout->count(); i++)
+        {
 
-    // Note: Josh and Cam S., implement what you want here.
+            //Match theme selection with appropriate background colours set enableDisable to true
+                //Yellow background
+            if(childName=="colYellow"){
+                child->property("enableDisable") = true;
+                backgroundColour="yellow";
+               switch(brightness){
+               case 1 :                                                                //brightness == 1 (from 1 - 9)
+                   background->setStyleSheet("background-color: rgb(210,210,0);");
+                   break;
+               case 2 :
+                   background->setStyleSheet("background-color: rgb(225,225,0);");
+                   break;
+               case 3 :
+                   background->setStyleSheet("background-color: rgb(235,235,0);");
+                   break;
+               case 4 :
+                   background->setStyleSheet("background-color: rgb(245,245,0);");
+                   break;
+               case 5 :
+                   background->setStyleSheet("background-color: rgb(250,255,0);");
+                   break;
+               case 6 :
+                   background->setStyleSheet("background-color: rgb(250,255,25);");
+                   break;
+               case 7 :
+                   background->setStyleSheet("background-color: rgb(250,255,50);");
+                   break;
+               case 8 :
+                   background->setStyleSheet("background-color: rgb(250,255,75);");
+                   break;
+               case 9 :                                                                //brightness == 9(from 1 - 9)
+                   background->setStyleSheet("background-color: rgb(250,255,100);");
+                   break;
+               }
+
+
+                //Purple background
+            }else if(childName=="colPurple"){
+                child->property("enableDisable") = true;
+                backgroundColour="purple";
+                switch(brightness){
+                case 1 :                                                                //brightness == 1 (from 1 - 9)
+                    background->setStyleSheet("background-color: rgb(110,35,255);");
+                    break;
+                case 2 :
+                    background->setStyleSheet("background-color: rgb(115,40,255);");
+                    break;
+                case 3 :
+                    background->setStyleSheet("background-color: rgb(120,50,255);");
+                    break;
+                case 4 :
+                    background->setStyleSheet("background-color: rgb(125,60, 255);");
+                    break;
+                case 5 :
+                     background->setStyleSheet("background-color: rgb(128,70, 255);");
+                    break;
+                case 6 :
+                    background->setStyleSheet("background-color: rgb(138,80,255);");
+                    break;
+                case 7 :
+                    background->setStyleSheet("background-color: rgb(148,90,255);");
+                    break;
+                case 8 :
+                    background->setStyleSheet("background-color: rgb(158,110,255);");
+                    break;
+                case 9 :                                                                //brightness == 9(from 1 - 9)
+                    background->setStyleSheet("background-color: rgb(166,121,255);");
+                    break;
+                }
+
+
+                //green background
+            }else if(childName=="colGreen"){
+                child->property("enableDisable") = true;
+                backgroundColour="green";
+                switch(brightness){
+                case 1 :                                                                //brightness == 1 (from 1 - 9)
+                    background->setStyleSheet("background-color: rgb(95,170,22);");
+                    break;
+                case 2 :
+                    background->setStyleSheet("background-color: rgb(100,180,22);");
+                    break;
+                case 3 :
+                    background->setStyleSheet("background-color: rgb(110,190,22);");
+                    break;
+                case 4 :
+                    background->setStyleSheet("background-color: rgb(115,200, 22);");
+                    break;
+                case 5 :
+                     background->setStyleSheet("background-color: rgb(115, 210, 22);");
+                    break;
+                case 6 :
+                    background->setStyleSheet("background-color: rgb(120,215,22);");
+                    break;
+                case 7 :
+                    background->setStyleSheet("background-color: rgb(125,225,22);");
+                    break;
+                case 8 :
+                    background->setStyleSheet("background-color: rgb(130,235,22);");
+                    break;
+                case 9 :                                                                //brightness == 9(from 1 - 9)
+                    background->setStyleSheet("background-color: rgb(135,245,22);");
+                    break;
+                }
+
+            //white background
+            }else if(childName=="colWhite"){        //default white background
+                child->property("enableDisable") = true;
+                backgroundColour="white";
+                switch(brightness){
+                case 1 :                                                                //brightness == 1 (from 1 - 9)
+                    background->setStyleSheet("background-color: rgb(200,200,200);");
+                    break;
+                case 2 :
+                    background->setStyleSheet("background-color: rgb(210,210,210);");
+                    break;
+                case 3 :
+                    background->setStyleSheet("background-color: rgb(220,220,220);");
+                    break;
+                case 4 :
+                    background->setStyleSheet("background-color: rgb(230,230,230);");
+                    break;
+                case 5 :
+                     background->setStyleSheet("background-color: rgb(240,240,240);");
+                    break;
+                case 6 :
+                    background->setStyleSheet("background-color: rgb(243,243,243);");
+                    break;
+                case 7 :
+                    background->setStyleSheet("background-color: rgb(247,247,247);");
+                    break;
+                case 8 :
+                    background->setStyleSheet("background-color: rgb(251,251,251);");
+                    break;
+                case 9 :                                                                //brightness == 9(from 1 - 9)
+                    background->setStyleSheet("background-color: rgb(255,255,255);");
+                    break;
+                }
+            }else {
+                child->property("enableDisable") = false;
+            }
+        }
+    }else if (childName=="EconOn"){
+      //save previous brightness
+        econSave = brightness;
+        brightness=1;
+
+        if(backgroundColour =="white"){
+            background->setStyleSheet("background-color: rgb(200,200,200);");
+        }else if(backgroundColour =="yellow"){
+            background->setStyleSheet("background-color: rgb(210,210,0);");
+        }else if(backgroundColour=="purple"){
+            background->setStyleSheet("background-color: rgb(110,35,255);");
+        }else if(backgroundColour=="green"){
+             background->setStyleSheet("background-color: rgb(95,170,22);");
+        }
+
+    }else if(childName=="Econoff"){
+     brightness = econSave;
+     econSave = 1;
+
+     if(backgroundColour=="yellow"){
+        switch(brightness){
+        case 1 :                                                                //brightness == 1 (from 1 - 9)
+            background->setStyleSheet("background-color: rgb(210,210,0);");
+            break;
+        case 2 :
+            background->setStyleSheet("background-color: rgb(225,225,0);");
+            break;
+        case 3 :
+            background->setStyleSheet("background-color: rgb(235,235,0);");
+            break;
+        case 4 :
+            background->setStyleSheet("background-color: rgb(245,245,0);");
+            break;
+        case 5 :
+            background->setStyleSheet("background-color: rgb(250,255,0);");
+            break;
+        case 6 :
+            background->setStyleSheet("background-color: rgb(250,255,25);");
+            break;
+        case 7 :
+            background->setStyleSheet("background-color: rgb(250,255,50);");
+            break;
+        case 8 :
+            background->setStyleSheet("background-color: rgb(250,255,75);");
+            break;
+        case 9 :                                                                //brightness == 9(from 1 - 9)
+            background->setStyleSheet("background-color: rgb(250,255,100);");
+            break;
+        }
+
+         //Purple background
+     }else if(backgroundColour=="purple"){
+         switch(brightness){
+         case 1 :                                                                //brightness == 1 (from 1 - 9)
+             background->setStyleSheet("background-color: rgb(110,35,255);");
+             break;
+         case 2 :
+             background->setStyleSheet("background-color: rgb(115,40,255);");
+             break;
+         case 3 :
+             background->setStyleSheet("background-color: rgb(120,50,255);");
+             break;
+         case 4 :
+             background->setStyleSheet("background-color: rgb(125,60, 255);");
+             break;
+         case 5 :
+              background->setStyleSheet("background-color: rgb(128,70, 255);");
+             break;
+         case 6 :
+             background->setStyleSheet("background-color: rgb(138,80,255);");
+             break;
+         case 7 :
+             background->setStyleSheet("background-color: rgb(148,90,255);");
+             break;
+         case 8 :
+             background->setStyleSheet("background-color: rgb(158,110,255);");
+             break;
+         case 9 :                                                                //brightness == 9(from 1 - 9)
+             background->setStyleSheet("background-color: rgb(166,121,255);");
+             break;
+         }
+
+         //green background
+     }else if(backgroundColour=="green"){
+         switch(brightness){
+         case 1 :                                                                //brightness == 1 (from 1 - 9)
+             background->setStyleSheet("background-color: rgb(95,170,22);");
+             break;
+         case 2 :
+             background->setStyleSheet("background-color: rgb(100,180,22);");
+             break;
+         case 3 :
+             background->setStyleSheet("background-color: rgb(110,190,22);");
+             break;
+         case 4 :
+             background->setStyleSheet("background-color: rgb(115,200, 22);");
+             break;
+         case 5 :
+              background->setStyleSheet("background-color: rgb(115, 210, 22);");
+             break;
+         case 6 :
+             background->setStyleSheet("background-color: rgb(120,215,22);");
+             break;
+         case 7 :
+             background->setStyleSheet("background-color: rgb(125,225,22);");
+             break;
+         case 8 :
+             background->setStyleSheet("background-color: rgb(130,235,22);");
+             break;
+         case 9 :                                                                //brightness == 9(from 1 - 9)
+             background->setStyleSheet("background-color: rgb(135,245,22);");
+             break;
+         }
+
+     //white background
+     }else if(backgroundColour=="white"){        //default white background
+         switch(brightness){
+         case 1 :                                                                //brightness == 1 (from 1 - 9)
+             background->setStyleSheet("background-color: rgb(200,200,200);");
+             break;
+         case 2 :
+             background->setStyleSheet("background-color: rgb(210,210,210);");
+             break;
+         case 3 :
+             background->setStyleSheet("background-color: rgb(220,220,220);");
+             break;
+         case 4 :
+             background->setStyleSheet("background-color: rgb(230,230,230);");
+             break;
+         case 5 :
+              background->setStyleSheet("background-color: rgb(240,240,240);");
+             break;
+         case 6 :
+             background->setStyleSheet("background-color: rgb(243,243,243);");
+             break;
+         case 7 :
+             background->setStyleSheet("background-color: rgb(247,247,247);");
+             break;
+         case 8 :
+             background->setStyleSheet("background-color: rgb(251,251,251);");
+             break;
+         case 9 :                                                                //brightness == 9(from 1 - 9)
+             background->setStyleSheet("background-color: rgb(255,255,255);");
+             break;
+         }
+     }
+
+ }
+
+
+
     // This is for menu items that do not have a submenu (i.e., selecting a child mode or frequency).
     return -1;
 }
@@ -131,9 +455,9 @@ int Display::updateSelectMenuItem(int index, int step, QLayout *layout)
 {
     int nextIndex = index + step;
 
-    QLabel *currMenuItem = dynamic_cast<QLabel *>(layout->itemAt(index)->widget());
+    QLabel *childName = dynamic_cast<QLabel *>(layout->itemAt(index)->widget());
 
-    QVariant currSelected = currMenuItem->property("selected");
+    QVariant currSelected = childName->property("selected");
 
     // If the menu item does not have a "selected" property that is a boolean, return with error -1.
     if (!currSelected.isValid() && currSelected.type() != QMetaType::Bool) { return -1; }
@@ -158,8 +482,8 @@ int Display::updateSelectMenuItem(int index, int step, QLayout *layout)
         if (!nextSelected.isValid() && nextSelected.type() != QMetaType::Bool) { return -1; }
 
         // Set the next menu item as selected and unselect the previous menu item.
-        currMenuItem->setProperty("selected", false);
-        currMenuItem->setFont(QFont("Sans", 13, QFont::Normal));
+        childName->setProperty("selected", false);
+        childName->setFont(QFont("Sans", 13, QFont::Normal));
         nextMenuItem->setProperty("selected", true);
         nextMenuItem->setFont(QFont("Sans", 15, QFont::Bold));
 
@@ -181,3 +505,297 @@ int Display::updatePowerLevel(int step)
     else if (step == -1) {powerLevel->setValue(powerLevel->value() - 1); return 0;}
     else {return -1;}
 }
+int Display::updateBrightnessLevel(int step)
+{
+    stack = device->findChild<QStackedWidget *>("stackedWidget");
+
+    QProgressBar *brightnessBar = device->findChild<QProgressBar *>("brightnessBar");
+
+
+    if (step == 1)
+    {
+        brightnessBar->setValue(brightnessBar->value() + 1);
+        brightness +=1;
+
+        //economy settings
+        economy=false;//if brightness is turned up, economy mode is turned off
+        QLabel *Econ_on = device->findChild<QLabel *>("EconOn");
+        QLabel *Econ_off = device->findChild<QLabel *>("EconOff");
+
+        //Change labels to correct for mode change
+        Econ_on->property("selected")=false;
+        Econ_on->property("enableDisable")=false;
+        Econ_off->property("selected")=true;
+        Econ_off->property("enableDisable")=true;
+
+        //adjust for colour of background
+        if(backgroundColour=="yellow"){
+           switch(brightness){
+           case 1 :                                                                //brightness == 1 (from 1 - 9)
+               background->setStyleSheet("background-color: rgb(210,210,0);");
+               break;
+           case 2 :
+               background->setStyleSheet("background-color: rgb(225,225,0);");
+               break;
+           case 3 :
+               background->setStyleSheet("background-color: rgb(235,235,0);");
+               break;
+           case 4 :
+               background->setStyleSheet("background-color: rgb(245,245,0);");
+               break;
+           case 5 :
+               background->setStyleSheet("background-color: rgb(250,255,0);");
+               break;
+           case 6 :
+               background->setStyleSheet("background-color: rgb(250,255,25);");
+               break;
+           case 7 :
+               background->setStyleSheet("background-color: rgb(250,255,50);");
+               break;
+           case 8 :
+               background->setStyleSheet("background-color: rgb(250,255,75);");
+               break;
+           case 9 :                                                                //brightness == 9(from 1 - 9)
+               background->setStyleSheet("background-color: rgb(250,255,100);");
+               break;
+           }
+
+            //Purple background
+        }else if(backgroundColour=="purple"){
+            switch(brightness){
+            case 1 :                                                                //brightness == 1 (from 1 - 9)
+                background->setStyleSheet("background-color: rgb(110,35,255);");
+                break;
+            case 2 :
+                background->setStyleSheet("background-color: rgb(115,40,255);");
+                break;
+            case 3 :
+                background->setStyleSheet("background-color: rgb(120,50,255);");
+                break;
+            case 4 :
+                background->setStyleSheet("background-color: rgb(125,60, 255);");
+                break;
+            case 5 :
+                 background->setStyleSheet("background-color: rgb(128,70, 255);");
+                break;
+            case 6 :
+                background->setStyleSheet("background-color: rgb(138,80,255);");
+                break;
+            case 7 :
+                background->setStyleSheet("background-color: rgb(148,90,255);");
+                break;
+            case 8 :
+                background->setStyleSheet("background-color: rgb(158,110,255);");
+                break;
+            case 9 :                                                                //brightness == 9(from 1 - 9)
+                background->setStyleSheet("background-color: rgb(166,121,255);");
+                break;
+            }
+
+
+            //green background
+        }else if(backgroundColour=="green"){
+            switch(brightness){
+            case 1 :                                                                //brightness == 1 (from 1 - 9)
+                background->setStyleSheet("background-color: rgb(95,170,22);");
+                break;
+            case 2 :
+                background->setStyleSheet("background-color: rgb(100,180,22);");
+                break;
+            case 3 :
+                background->setStyleSheet("background-color: rgb(110,190,22);");
+                break;
+            case 4 :
+                background->setStyleSheet("background-color: rgb(115,200, 22);");
+                break;
+            case 5 :
+                 background->setStyleSheet("background-color: rgb(115, 210, 22);");
+                break;
+            case 6 :
+                background->setStyleSheet("background-color: rgb(120,215,22);");
+                break;
+            case 7 :
+                background->setStyleSheet("background-color: rgb(125,225,22);");
+                break;
+            case 8 :
+                background->setStyleSheet("background-color: rgb(130,235,22);");
+                break;
+            case 9 :                                                                //brightness == 9(from 1 - 9)
+                background->setStyleSheet("background-color: rgb(135,245,22);");
+                break;
+            }
+
+        //white background
+        }else if(backgroundColour=="white"){        //default white background
+            switch(brightness){
+            case 1 :                                                                //brightness == 1 (from 1 - 9)
+                background->setStyleSheet("background-color: rgb(200,200,200);");
+                break;
+            case 2 :
+                background->setStyleSheet("background-color: rgb(210,210,210);");
+                break;
+            case 3 :
+                background->setStyleSheet("background-color: rgb(220,220,220);");
+                break;
+            case 4 :
+                background->setStyleSheet("background-color: rgb(230,230,230);");
+                break;
+            case 5 :
+                 background->setStyleSheet("background-color: rgb(240,240,240);");
+                break;
+            case 6 :
+                background->setStyleSheet("background-color: rgb(243,243,243);");
+                break;
+            case 7 :
+                background->setStyleSheet("background-color: rgb(247,247,247);");
+                break;
+            case 8 :
+                background->setStyleSheet("background-color: rgb(251,251,251);");
+                break;
+            case 9 :                                                                //brightness == 9(from 1 - 9)
+                background->setStyleSheet("background-color: rgb(255,255,255);");
+                break;
+            }
+        }
+
+        return 0;
+
+    }
+    else if (step == -1)
+    {
+        brightnessBar->setValue(brightnessBar->value() - 1);
+        brightness -=1;
+        if(backgroundColour=="yellow"){
+           switch(brightness){
+           case 1 :                                                                //brightness == 1 (from 1 - 9)
+               background->setStyleSheet("background-color: rgb(210,210,0);");
+               break;
+           case 2 :
+               background->setStyleSheet("background-color: rgb(225,225,0);");
+               break;
+           case 3 :
+               background->setStyleSheet("background-color: rgb(235,235,0);");
+               break;
+           case 4 :
+               background->setStyleSheet("background-color: rgb(245,245,0);");
+               break;
+           case 5 :
+               background->setStyleSheet("background-color: rgb(250,255,0);");
+               break;
+           case 6 :
+               background->setStyleSheet("background-color: rgb(250,255,25);");
+               break;
+           case 7 :
+               background->setStyleSheet("background-color: rgb(250,255,50);");
+               break;
+           case 8 :
+               background->setStyleSheet("background-color: rgb(250,255,75);");
+               break;
+           case 9 :                                                                //brightness == 9(from 1 - 9)
+               background->setStyleSheet("background-color: rgb(250,255,100);");
+               break;
+           }
+
+
+            //Purple background
+        }else if(backgroundColour=="purple"){
+            switch(brightness){
+            case 1 :                                                                //brightness == 1 (from 1 - 9)
+                background->setStyleSheet("background-color: rgb(110,35,255);");
+                break;
+            case 2 :
+                background->setStyleSheet("background-color: rgb(115,40,255);");
+                break;
+            case 3 :
+                background->setStyleSheet("background-color: rgb(120,50,255);");
+                break;
+            case 4 :
+                background->setStyleSheet("background-color: rgb(125,60, 255);");
+                break;
+            case 5 :
+                 background->setStyleSheet("background-color: rgb(128,70, 255);");
+                break;
+            case 6 :
+                background->setStyleSheet("background-color: rgb(138,80,255);");
+                break;
+            case 7 :
+                background->setStyleSheet("background-color: rgb(148,90,255);");
+                break;
+            case 8 :
+                background->setStyleSheet("background-color: rgb(158,110,255);");
+                break;
+            case 9 :                                                                //brightness == 9(from 1 - 9)
+                background->setStyleSheet("background-color: rgb(166,121,255);");
+                break;
+            }
+
+
+            //green background
+        }else if(backgroundColour=="green"){
+            switch(brightness){
+            case 1 :                                                                //brightness == 1 (from 1 - 9)
+                background->setStyleSheet("background-color: rgb(95,170,22);");
+                break;
+            case 2 :
+                background->setStyleSheet("background-color: rgb(100,180,22);");
+                break;
+            case 3 :
+                background->setStyleSheet("background-color: rgb(110,190,22);");
+                break;
+            case 4 :
+                background->setStyleSheet("background-color: rgb(115,200, 22);");
+                break;
+            case 5 :
+                 background->setStyleSheet("background-color: rgb(115, 210, 22);");
+                break;
+            case 6 :
+                background->setStyleSheet("background-color: rgb(120,215,22);");
+                break;
+            case 7 :
+                background->setStyleSheet("background-color: rgb(125,225,22);");
+                break;
+            case 8 :
+                background->setStyleSheet("background-color: rgb(130,235,22);");
+                break;
+            case 9 :                                                                //brightness == 9(from 1 - 9)
+                background->setStyleSheet("background-color: rgb(135,245,22);");
+                break;
+            }
+
+        //white background
+        }else if(backgroundColour=="white"){        //default white background
+            switch(brightness){
+            case 1 :                                                                //brightness == 1 (from 1 - 9)
+                background->setStyleSheet("background-color: rgb(200,200,200);");
+                break;
+            case 2 :
+                background->setStyleSheet("background-color: rgb(210,210,210);");
+                break;
+            case 3 :
+                background->setStyleSheet("background-color: rgb(220,220,220);");
+                break;
+            case 4 :
+                background->setStyleSheet("background-color: rgb(230,230,230);");
+                break;
+            case 5 :
+                 background->setStyleSheet("background-color: rgb(240,240,240);");
+                break;
+            case 6 :
+                background->setStyleSheet("background-color: rgb(243,243,243);");
+                break;
+            case 7 :
+                background->setStyleSheet("background-color: rgb(247,247,247);");
+                break;
+            case 8 :
+                background->setStyleSheet("background-color: rgb(251,251,251);");
+                break;
+            case 9 :                                                                //brightness == 9(from 1 - 9)
+                background->setStyleSheet("background-color: rgb(255,255,255);");
+                break;
+            }
+        }
+
+        qDebug() << "decreasing brightness on display -1"; return 0;}
+    else {return -1;}
+}
+

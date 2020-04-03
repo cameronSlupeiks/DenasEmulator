@@ -59,7 +59,7 @@ int Microprocessor::request(QString macro)
  */
 int Microprocessor::request(QString macro, struct request packet)
 {
-    if (macro == UPDATE_SELECT_ITEM || macro == UPDATE_CHANGE_MODE || macro == UPDATE_CHANGE_MENU || macro == UPDATE_POWER_LEVEL)
+    if (macro == UPDATE_SELECT_ITEM || macro == UPDATE_CHANGE_MODE || macro == UPDATE_CHANGE_MENU || macro == UPDATE_POWER_LEVEL|| macro == UPDATE_BRIGHTNESS_LEVEL)
     {
         return display->update(macro, packet);
     }
