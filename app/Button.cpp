@@ -40,10 +40,6 @@ int Button::press(QString type)
     {
         return ControlButton(*this).increment_decrement(1);
     }
-    else if (type == BUTTON_POWER)
-    {
-        return PowerButton(*this).toggle();
-    }
     else if (type == BUTTON_OK)
     {
         return OkButton(*this).confirm();

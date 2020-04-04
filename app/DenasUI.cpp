@@ -31,6 +31,7 @@ DenasUI::DenasUI(QWidget *parent) : QMainWindow(parent), ui(new Ui::DenasUI)
     timer->start(9000);
 }
 
+/*
 void DenasUI::timer_exec(){
 
    QWidget *device = ui->centralwidget;
@@ -55,6 +56,7 @@ void DenasUI::timer_exec(){
    packet.func = "drain";
    microProcessor->request("BATTERY_DRAIN", packet);
 }
+*/
 
 DenasUI::~DenasUI()
 {

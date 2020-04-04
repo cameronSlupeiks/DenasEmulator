@@ -21,5 +21,6 @@ class Microprocessor
         Button *button;
         Display *display;
         Battery *battery;
+};
 
 #endif // MICROPROCESSOR_H
