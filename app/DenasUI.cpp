@@ -19,12 +19,12 @@ DenasUI::DenasUI(QWidget *parent) : QMainWindow(parent), ui(new Ui::DenasUI)
     ui->upButton->setIcon(style.standardIcon(QStyle::SP_ArrowUp));
     ui->downButton->setIcon(style.standardIcon(QStyle::SP_ArrowDown));
 
-    // Initialize the device processor.
+    // Initialize the device processor.    
     QWidget *device = ui->centralwidget;
+    device->findChild<QLabel*>("batWarning")->setVisible(false);
     microProcessor = new Microprocessor(device);
 
     // Initialize and start the battery timer.
-
     timer = new QTimer(this);
     packet.time = timer;
     connect(timer, SIGNAL(timeout()), this, SLOT(timer_exec()));
@@ -34,7 +34,7 @@ DenasUI::DenasUI(QWidget *parent) : QMainWindow(parent), ui(new Ui::DenasUI)
 void DenasUI::timer_exec(){
 
    QWidget *device = ui->centralwidget;
-   QProgressBar *theBar = device->findChild<QProgressBar*>("progressBar");
+   QProgressBar *theBar = device->findChild<QProgressBar *>("progressBar");
 
    if (theBar->value() <= 2)
    {
@@ -44,10 +44,10 @@ void DenasUI::timer_exec(){
    else if (theBar->value() <= 20)
    {
        packet.func = "warning";
-       microProcessor->request("BATTERY_WARNING",packet);
+       microProcessor->request("BATTERY_WARNING", packet);
    }
 
-   QCheckBox* temp = device->findChild<QCheckBox*>("checkBox");
+   QCheckBox* temp = device->findChild<QCheckBox *>("checkBox");
 
    if (temp->checkState() == 2) {packet.useCase = "contact";}
    else {packet.useCase = "";}
@@ -93,7 +93,7 @@ void DenasUI::on_okButton_clicked()
 void DenasUI::on_powerButton_clicked()
 {
     QString buttonType = ui->powerButton->property("type").toString(); // BUTTON_POWER
-    microProcessor->request(buttonType);
+    microProcessor->request(buttonType, packet);
 }
 
 void DenasUI::on_mainMenuButton_clicked()
