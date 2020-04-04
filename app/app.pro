@@ -16,14 +16,31 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    main.cpp \
-    denasui.cpp
+    Battery.cpp \
+    Button.cpp \
+    ControlButton.cpp \
+    DenasUI.cpp \
+    Display.cpp \
+    Main.cpp \
+    Microprocessor.cpp \
+    NavButton.cpp \
+    OkButton.cpp \
+    PowerButton.cpp
 
 HEADERS += \
-    denasui.h
+    Battery.h \
+    Button.h \
+    ControlButton.h \
+    DenasUI.h \
+    Display.h \
+    Macros.h \
+    Microprocessor.h \
+    NavButton.h \
+    OkButton.h \
+    PowerButton.h
 
 FORMS += \
-    denasui.ui
+    DenasUI.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
