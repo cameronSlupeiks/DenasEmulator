@@ -14,14 +14,14 @@ class Battery
         int drain(struct request);
 
     private:
-        int battery_darin(struct request);
+        int battery_drain(struct request);
         int warning();
         int dead();
         QWidget *device;
         QProgressBar *bar;
         QProgressBar *powerBar;
         QLabel *message;
-        QSlider *brightness;
+        QProgressBar *brightness;
         class Microprocessor *processor;
 };
 

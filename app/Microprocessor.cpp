@@ -27,7 +27,7 @@ Microprocessor::Microprocessor(const Microprocessor &processor)
  *
  * in: the display stack (QStackedWidget*)
  */
-Microprocessor::Microprocessor(QWidget *device) : button(new Button(this, device)), display(new Display(device))
+Microprocessor::Microprocessor(QWidget *device) : button(new Button(this, device)), display(new Display(device)), battery(new Battery(device))
 {
     qDebug() << "Constructing processor override...";
 }
@@ -72,7 +72,8 @@ int Microprocessor::request(QString macro)
 int Microprocessor::request(QString macro, struct request packet)
 {
     if (macro == UPDATE_SELECT_ITEM || macro == UPDATE_CHANGE_MODE || macro == UPDATE_CHANGE_MENU ||
-        macro == UPDATE_POWER_LEVEL || macro == UPDATE_TIMER || macro == UPDATE_FREQUENCY)
+        macro == UPDATE_POWER_LEVEL || macro == UPDATE_TIMER || macro == UPDATE_FREQUENCY ||
+        macro == UPDATE_BRIGHTNESS_LEVEL)
     {
         return display->update(macro, packet);
     }
