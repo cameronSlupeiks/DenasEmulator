@@ -99,6 +99,8 @@ void DenasUI::on_powerButton_clicked()
 void DenasUI::on_mainMenuButton_clicked()
 {
     // Get the current stack index (i.e., main menu, programs, frequency, etc.)
+    ui->centralwidget->findChild<QPushButton *>("upButton")->setEnabled(true);
+    ui->centralwidget->findChild<QPushButton *>("downButton")->setEnabled(true);
     ui->stackedWidget->setCurrentIndex(0);
 }
 
