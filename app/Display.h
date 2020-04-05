@@ -13,10 +13,10 @@ class Display : public QObject
         Display(QWidget*);
 
         QString backgroundColour = "white";
-
         bool economy = false;
         int brightness = 5;
         int econSave = 0;
+
         int update(QString, struct request);
         int reset();
 
