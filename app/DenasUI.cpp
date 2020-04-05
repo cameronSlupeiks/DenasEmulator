@@ -137,8 +137,9 @@ void DenasUI::on_backButton_clicked()
        ui->stackedWidget->setCurrentIndex(6);
         break;
     case 11 :
+       ui->centralwidget->findChild<QPushButton *>("upButton")->setEnabled(true);
+       ui->centralwidget->findChild<QPushButton *>("downButton")->setEnabled(true);
        ui->stackedWidget->setCurrentIndex(1);
-
     }
 }
 
