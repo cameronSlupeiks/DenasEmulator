@@ -59,7 +59,7 @@ int Display::update(QString type, struct request packet)
 
 int Display::updateMode(QString childName, QLayout *layout)
 {
-    QLabel *child = device->findChild<QLabel *>(childName);
+        QLabel *child = device->findChild<QLabel *>(childName);
         stack = device->findChild<QStackedWidget*>("stackedWidget");
 
         // Get the index of the current widget within the stack.
@@ -442,6 +442,8 @@ int Display::updateMenu(int index, QLayout *layout)
 
     if (currMenu->text() == "ALLERGIES" || currMenu->text() == "HEAD" || currMenu->text() == "ARMS")
     {
+        device->findChild<QWidget *>("upButton")->setEnabled(false);
+        device->findChild<QWidget *>("downButton")->setEnabled(false);
         subMenu = stack->findChild<QWidget *>("power");
     }
 
